@@ -29,7 +29,7 @@ package Crypt::Rijndael;
 
 require DynaLoader;
 
-$VERSION = 0.04;
+$VERSION = '0.06_01';
 @ISA = qw/DynaLoader/;
 
 bootstrap Crypt::Rijndael $VERSION;
@@ -78,7 +78,7 @@ Decrypts C<$data>.
 
 =head1 SEE ALSO
 
-  L<Crypt::CBC>, http://www.csrc.nist.gov/encryption/aes/
+L<Crypt::CBC>, http://www.csrc.nist.gov/encryption/aes/
 
 =head1 BUGS
 
@@ -86,10 +86,17 @@ Should EXPORT or EXPORT_OK the MODE constants.
 
 =head1 AUTHOR
 
- Rafael R. Sevilla <sevillar@team.ph.inter.net>
+Currently maintained by brian d foy, C<< <bdfoy@cpan.org> >>.
 
- The Rijndael Algorithm was developed by Vincent Rijmen and Joan Daemen,
- and has been selected as the US Government's Advanced Encryption Standard.
+Original code by  Rafael R. Sevilla.
+
+The Rijndael Algorithm was developed by Vincent Rijmen and Joan Daemen,
+and has been selected as the US Government's Advanced Encryption Standard.
+
+=head1 LICENSE
+
+This code is licensed under the GNU Public License. See L<COPYING> for
+details.
 
 =cut
 

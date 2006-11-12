@@ -1,6 +1,8 @@
 /* rijndael - An implementation of the Rijndael cipher.
  * Copyright (C) 2000, 2001 Rafael R. Sevilla <sevillar@team.ph.inter.net>
  *
+ * Currently maintained by brian d foy, <bdfoy@cpan.org>
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either

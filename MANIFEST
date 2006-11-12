@@ -1,11 +1,14 @@
+_rijndael.c
+Changes
 COPYING
-MANIFEST
 Makefile.PL
+MANIFEST
+NEWS
 README
+rijndael.h
 Rijndael.pm
 Rijndael.xs
-_rijndael.c
-rijndael.h
-test
-typemap
 t/00_load.t
+t/test_manifest
+typemap
+META.yml                                 Module meta-data (added by MakeMaker)

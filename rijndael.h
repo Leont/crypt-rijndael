@@ -1,6 +1,8 @@
 /* rijndael - An implementation of the Rijndael cipher.
  * Copyright (C) 2000 Rafael R. Sevilla <sevillar@team.ph.inter.net>
  *
+ * Currently maintained by brian d foy, <bdfoy@cpan.org>
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -26,9 +28,10 @@
 #define RIJNDAEL_H
 
 #include <stdlib.h>
-
-typedef unsigned long UINT32;
-typedef unsigned char UINT8;
+#include <sys/types.h>
+ 
+typedef __uint32_t UINT32;
+typedef __uint8_t UINT8;
 
 /* Other block sizes and key lengths are possible, but in the context of
  * the ssh protocols, 256 bits is the default. */
