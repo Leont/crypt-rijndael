@@ -4,3 +4,6 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+0.06 - Sun Nov 12 16:23:07 2006
+	* Let's try some hardcoded types for UINT(32|8) for Windows.
+
