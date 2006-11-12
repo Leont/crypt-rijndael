@@ -3,7 +3,6 @@ Changes
 COPYING
 Makefile.PL
 MANIFEST
-META.yml			Module meta-data (added by MakeMaker)
 NEWS
 README
 rijndael.h
