@@ -1,0 +1,6 @@
+0.06 - Sun Nov 12 10:38:56 2006
+	* Adjust version number to match distro number (RT #4227)
+	* Use <sys/types.h> instead of hard-coding (RT #22755, 9514, 18812,
+	1444, 503).
+	* This module is now maintained by brian d foy (bdfoy@cpan.org)
+
