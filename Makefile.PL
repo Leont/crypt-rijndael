@@ -6,8 +6,7 @@ eval "use Test::Manifest 1.14";
 
 WriteMakefile(
 	NAME           => "Crypt::Rijndael",
-#    VERSION_FROM   => "Rijndael.pm",
-	VERSION        => '0.06_01',
+    VERSION_FROM   => "Rijndael.pm",
 	
 	'PREREQ_PM'    => { 
 			'Test::More'         => '0',

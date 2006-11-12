@@ -29,7 +29,7 @@ package Crypt::Rijndael;
 
 require DynaLoader;
 
-$VERSION = '0.06_01';
+$VERSION = '0.06_02';
 @ISA = qw/DynaLoader/;
 
 bootstrap Crypt::Rijndael $VERSION;

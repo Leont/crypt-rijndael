@@ -29,9 +29,14 @@
 
 #include <stdlib.h>
 #include <sys/types.h>
- 
-typedef __uint32_t UINT32;
-typedef __uint8_t UINT8;
+
+#ifdef WIN32
+    typedef unsigned long UINT32;
+    typedef unsigned char UINT8;
+#else
+	typedef __uint32_t UINT32;
+	typedef __uint8_t UINT8;
+#endif
 
 /* Other block sizes and key lengths are possible, but in the context of
  * the ssh protocols, 256 bits is the default. */
