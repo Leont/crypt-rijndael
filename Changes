@@ -4,6 +4,9 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+0.06 - Wed Nov 15 14:43:37 2006
+	* Try UINT patch from David Golden to get this to work on MinGW
+
 0.06 - Wed Nov 15 11:07:08 2006
 	* Re-jiggered logic to define UINT32 and UINT8. First I'll try
 	sys/types.h, then check if they are already defined elsewhere, and
