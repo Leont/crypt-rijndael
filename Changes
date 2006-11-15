@@ -4,6 +4,15 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+0.06 - Wed Nov 15 11:07:08 2006
+	* Re-jiggered logic to define UINT32 and UINT8. First I'll try
+	sys/types.h, then check if they are already defined elsewhere, and
+	lastly hardcode the typedefs based on platform. The previous 
+	release (0.06_02) had some problems on Windows from conflicting
+	typedefs (similar to the cygwin problems with libjpeg and X), so
+	I guard my typedefs by checking for previous definitions. Let's 
+	hope those previous definitions are right :)
+
 0.06 - Sun Nov 12 16:23:07 2006
 	* Let's try some hardcoded types for UINT(32|8) for Windows.
 
