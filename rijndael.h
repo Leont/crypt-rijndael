@@ -35,6 +35,11 @@
 	typedef __uint8_t  UINT8;
 #endif
 
+#if defined(__MINGW_H)
+	typedef unsigned int  UINT32;
+	typedef unsigned char UINT8;
+#endif
+
 /* If sys/types doesn't work, *and* something else hasn't defined these,
  * lets do it ourselves.
  * 
