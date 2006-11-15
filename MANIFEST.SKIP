@@ -11,7 +11,6 @@ CVS
 pm_to_blib
 \.old$
 ^test$
-META.yml
 \.o$
 \.bs$
 Rijndael.c$
