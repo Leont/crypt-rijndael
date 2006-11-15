@@ -3,3 +3,4 @@ Rijndael.bs
 Rijndael.c
 .DS_Store
 Crypt-*
+META.yml
