@@ -30,13 +30,29 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
-#ifdef WIN32
-    typedef unsigned long UINT32;
-    typedef unsigned char UINT8;
-#else
+#if defined(_SYS_TYPES_H_)       /* I expect this to be the usual case */
 	typedef __uint32_t UINT32;
-	typedef __uint8_t UINT8;
+	typedef __uint8_t  UINT8;
 #endif
+
+/* If sys/types doesn't work, *and* something else hasn't defined these,
+ * lets do it ourselves.
+ * 
+ * MinGW defines these in win32api/include/basetsd.h
+ */
+ 
+#if !defined(UINT32)
+#  if defined(WIN32)
+	typedef unsigned long UINT32;
+#  endif
+#endif
+
+#if !defined(UINT8)
+#  if defined(WIN32)
+	typedef unsigned char UINT8;
+#  endif
+#endif
+
 
 /* Other block sizes and key lengths are possible, but in the context of
  * the ssh protocols, 256 bits is the default. */

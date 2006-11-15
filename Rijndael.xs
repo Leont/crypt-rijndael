@@ -134,6 +134,8 @@ set_iv(self, data)
 	  STRLEN size;
 	  void *rawbytes = SvPV(data,size);
 
+	  if( size !=  RIJNDAEL_BLOCKSIZE )
+	  	croak( "set_iv: initial value must be the blocksize (%d bytes), but was %d bytes", RIJNDAEL_BLOCKSIZE, size );
 	  memcpy(self->iv, rawbytes, RIJNDAEL_BLOCKSIZE);
 	}
 

@@ -1,2 +1,3 @@
 # $Id$
 00_load.t
+bad_iv.t
