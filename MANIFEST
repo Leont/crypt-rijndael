@@ -3,6 +3,7 @@ Changes
 COPYING
 Makefile.PL
 MANIFEST
+META.yml
 NEWS
 README
 rijndael.h
