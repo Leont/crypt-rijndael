@@ -11,3 +11,4 @@ Rijndael.xs
 t/00_load.t
 t/test_manifest
 typemap
+META.yml                                 Module meta-data (added by MakeMaker)
