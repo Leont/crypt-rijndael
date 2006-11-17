@@ -40,24 +40,10 @@
 	typedef unsigned char UINT8;
 #endif
 
-/* If sys/types doesn't work, *and* something else hasn't defined these,
- * lets do it ourselves.
- * 
- * MinGW defines these in win32api/include/basetsd.h
- */
- 
-#if !defined(UINT32)
-#  if defined(WIN32)
+#if defined(WIN32) && !defined(__MINGW_H)
 	typedef unsigned long UINT32;
-#  endif
-#endif
-
-#if !defined(UINT8)
-#  if defined(WIN32)
 	typedef unsigned char UINT8;
-#  endif
 #endif
-
 
 /* Other block sizes and key lengths are possible, but in the context of
  * the ssh protocols, 256 bits is the default. */
