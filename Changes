@@ -4,6 +4,10 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+0.06 - Fri Nov 17 14:56:19 2006
+	* Fooled with header file some more, and tested it myself on
+	Cygwin. Instead of checking for WIN32, just check for __CYGWIN__
+
 0.06 - Fri Nov 17 11:13:25 2006
 	* The last two revisions seem to not define UINTxx and ends up with a
 	parse error. Let's try this, as I go off to dig out my Windows box.
