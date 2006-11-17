@@ -35,15 +35,17 @@
 	typedef __uint8_t  UINT8;
 #endif
 
-#if defined(__MINGW_H)
+
+#if defined(__CYGWIN__)
 	typedef unsigned int  UINT32;
 	typedef unsigned char UINT8;
 #endif
 
-#if defined(WIN32) && !defined(__MINGW_H)
+#if defined(__MINGW32__)
 	typedef unsigned long UINT32;
 	typedef unsigned char UINT8;
 #endif
+
 
 /* Other block sizes and key lengths are possible, but in the context of
  * the ssh protocols, 256 bits is the default. */
