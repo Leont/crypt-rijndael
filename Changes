@@ -4,6 +4,10 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+0.06 - Fri Nov 17 11:13:25 2006
+	* The last two revisions seem to not define UINTxx and ends up with a
+	parse error. Let's try this, as I go off to dig out my Windows box.
+
 0.06 - Wed Nov 15 14:43:37 2006
 	* Try UINT patch from David Golden to get this to work on MinGW
 
