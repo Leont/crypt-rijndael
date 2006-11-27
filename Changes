@@ -4,6 +4,10 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+0.06 - Mon Nov 27 10:37:18 2006
+	* more header file fiddling to get everyone to define the right
+	abstract types. This time check for _SYS_TYPES_H
+
 0.06 - Fri Nov 17 14:56:19 2006
 	* Fooled with header file some more, and tested it myself on
 	Cygwin. Instead of checking for WIN32, just check for __CYGWIN__
