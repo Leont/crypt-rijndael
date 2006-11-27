@@ -13,7 +13,7 @@ Crypt::Rijndael - Crypt::CBC compliant Rijndael encryption module
 
  $cipher->set_iv($iv);
  $crypted = $cipher->encrypt($plaintext);
- # - OR -
+ 	# - OR -
  $plaintext = $cipher->decrypt($crypted);
 
 =head1 DESCRIPTION
