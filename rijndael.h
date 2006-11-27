@@ -30,11 +30,10 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
-#if defined(_SYS_TYPES_H_)       /* I expect this to be the usual case */
+#if defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_)   /* I expect this to be the usual case */
 	typedef __uint32_t UINT32;
 	typedef __uint8_t  UINT8;
 #endif
-
 
 #if defined(__CYGWIN__)
 	typedef unsigned int  UINT32;
@@ -50,7 +49,7 @@
 /* Other block sizes and key lengths are possible, but in the context of
  * the ssh protocols, 256 bits is the default. */
 #define RIJNDAEL_BLOCKSIZE 16
-#define RIJNDAEL_KEYSIZE 32
+#define RIJNDAEL_KEYSIZE   32
 
 #define     MODE_ECB        1    /*  Are we ciphering in ECB mode?   */
 #define     MODE_CBC        2    /*  Are we ciphering in CBC mode?   */
