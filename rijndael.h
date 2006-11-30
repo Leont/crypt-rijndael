@@ -30,21 +30,39 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
+#ifdef _CRYPT_RIJNDAEL_H_TYPES
+	#undef _CRYPT_RIJNDAEL_H_TYPES
+#endif
+
 #if defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_)   /* I expect this to be the usual case */
+	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef __uint32_t UINT32;
 	typedef __uint8_t  UINT8;
 #endif
 
-#if defined(__CYGWIN__)
+#if defined(__CYGWIN__) && ! defined(_CRYPT_RIJNDAEL_H_TYPES)
+	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef unsigned int  UINT32;
 	typedef unsigned char UINT8;
 #endif
 
-#if defined(__MINGW32__)
+#if defined(__MINGW32__) && ! defined(_CRYPT_RIJNDAEL_H_TYPES)
+	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef unsigned long UINT32;
 	typedef unsigned char UINT8;
 #endif
 
+#if defined(WIN32) && ! defined(_CRYPT_RIJNDAEL_H_TYPES)
+	#define _CRYPT_RIJNDAEL_H_TYPES
+	typedef unsigned int  UINT32;
+	typedef unsigned char UINT8;
+#endif
+
+#if ! defined(_CRYPT_RIJNDAEL_H_TYPES)
+	#define _CRYPT_RIJNDAEL_H_TYPES
+	typedef unsigned int  UINT32;
+	typedef unsigned char UINT8;
+#endif	
 
 /* Other block sizes and key lengths are possible, but in the context of
  * the ssh protocols, 256 bits is the default. */
