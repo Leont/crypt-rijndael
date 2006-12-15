@@ -35,7 +35,7 @@
 #endif
 
 #if defined( __sun__ )
-        #define _CRYPT_RIJNDAEL_H_TYPES
+	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef uint32_t UINT32;
 	typedef uint8_t UINT8;
 #endif
