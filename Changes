@@ -4,6 +4,10 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+0.06 - Fri Dec 15 08:12:02 2006
+	* Updated header file to handle Solaris special case
+	* I think this might be the release candidate for 0.07! :)
+
 0.06 - Wed Nov 29 19:51:33 2006
 	* Adjusting WIN32 targets for typedefs. Some things look like both
 	Unix and Windows, so I don't want compilers to choke if it tries to
