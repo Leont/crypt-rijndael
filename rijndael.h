@@ -34,7 +34,13 @@
 	#undef _CRYPT_RIJNDAEL_H_TYPES
 #endif
 
-#if defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_)   /* I expect this to be the usual case */
+#if defined( __sun__ )
+        #define _CRYPT_RIJNDAEL_H_TYPES
+	typedef uint32_t UINT32;
+	typedef uint8_t UINT8;
+#endif
+
+#if ! defined(__sun__) && ( defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_) )   /* I expect this to be the usual case */
 	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef __uint32_t UINT32;
 	typedef __uint8_t  UINT8;
