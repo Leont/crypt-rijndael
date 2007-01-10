@@ -4,6 +4,9 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+0.06 - Wed Jan 10 00:35:10 2007
+	* Let's try the int type for MinGW:wq
+
 0.06 - Fri Dec 15 08:12:02 2006
 	* Updated header file to handle Solaris special case
 	* I think this might be the release candidate for 0.07! :)
