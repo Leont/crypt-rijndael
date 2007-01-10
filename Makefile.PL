@@ -7,6 +7,7 @@ eval "use Test::Manifest 1.14";
 WriteMakefile(
 	NAME           => "Crypt::Rijndael",
     VERSION_FROM   => "Rijndael.pm",
+	'LICENSE'       => 'perl',
 	
 	'PREREQ_PM'    => { 
 			'Test::More'         => '0',

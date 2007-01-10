@@ -1,6 +1,7 @@
 _rijndael.c
 Changes
 COPYING
+examples/README
 Makefile.PL
 MANIFEST
 META.yml
