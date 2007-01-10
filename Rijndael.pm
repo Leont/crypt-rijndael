@@ -29,7 +29,7 @@ package Crypt::Rijndael;
 
 require DynaLoader;
 
-$VERSION = '0.06_09';
+$VERSION = '0.06_10';
 @ISA = qw/DynaLoader/;
 
 bootstrap Crypt::Rijndael $VERSION;
@@ -95,8 +95,8 @@ and has been selected as the US Government's Advanced Encryption Standard.
 
 =head1 LICENSE
 
-This code is licensed under the GNU Public License. See L<COPYING> for
-details.
+This software is licensed under the GNU Public License. See the included
+COPYING file for details.
 
 =cut
 

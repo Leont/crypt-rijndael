@@ -56,7 +56,7 @@
 
 #if defined(__MINGW32__) && ! defined(_CRYPT_RIJNDAEL_H_TYPES)
 	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef unsigned long UINT32;
+	typedef unsigned int UINT32;
 	typedef unsigned char UINT8;
 #endif
 

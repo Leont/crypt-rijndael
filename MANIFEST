@@ -2,6 +2,7 @@ _rijndael.c
 Changes
 COPYING
 examples/README
+LICENSE
 Makefile.PL
 MANIFEST
 META.yml
