@@ -4,6 +4,11 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+1.01 - Wed Jan 10 19:14:14 2007
+	* Bump to a release version. This is the same as 0.06_10.
+	* This release should fix the problems with INT types on all
+	platforms, including 64 bit platforms.
+
 0.06 - Wed Jan 10 00:35:10 2007
 	* Let's try the int type for MinGW:wq
 
