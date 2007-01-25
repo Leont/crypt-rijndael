@@ -26,10 +26,12 @@ as the Advanced Encryption Standard.
 =cut
 
 package Crypt::Rijndael;
+use strict;
+use vars qw( $VERSION @ISA );
 
 require DynaLoader;
 
-$VERSION = '1.01';
+$VERSION = '1.02';
 @ISA = qw/DynaLoader/;
 
 bootstrap Crypt::Rijndael $VERSION;
@@ -73,6 +75,24 @@ can be of (almost) any length.
 =item $cipher->decrypt($data)
 
 Decrypts C<$data>.
+
+=back
+
+=head2 Encryption modes
+
+Use these constants to select the cipher type:
+
+=over 4
+
+=item MODE_CBC - Cipher Block Chaining
+
+=item MODE_CFB - Cipher feedback
+
+=item MODE_CTR - Counter mode
+
+=item MODE_ECB - Electronic cookbook mode
+
+=item MODE_OFB - Output feedback
 
 =back
 

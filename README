@@ -52,6 +52,15 @@ DESCRIPTION
     $cipher->decrypt($data)
         Decrypts $data.
 
+  Encryption modes
+    Use these constants to select the cipher type:
+
+    MODE_CBC - Cipher Block Chaining
+    MODE_CFB - Cipher feedback
+    MODE_CTR - Counter mode
+    MODE_ECB - Electronic cookbook mode
+    MODE_OFB - Output feedback
+
 SEE ALSO
     Crypt::CBC, http://www.csrc.nist.gov/encryption/aes/
 
