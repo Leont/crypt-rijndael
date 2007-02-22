@@ -3,4 +3,6 @@ pm_to_blib
 blib
 Crypt-*
 *gz
-Makefile$
+Makefile
+Rijndael.bs
+Rijndael.c
