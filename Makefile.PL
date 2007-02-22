@@ -7,7 +7,8 @@ eval "use Test::Manifest 1.14";
 WriteMakefile(
 	NAME           => "Crypt::Rijndael",
     VERSION_FROM   => "Rijndael.pm",
-	'LICENSE'       => 'gpl',
+	LICENSE        => 'gpl',
+	AUTHOR         => 'Rafael R. Sevilla (maintained by brian d foy <bdfoy@cpan.org>)',
 	
 	'PREREQ_PM'    => { 
 			'Test::More'         => '0',
