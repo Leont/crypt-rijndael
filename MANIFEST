@@ -12,5 +12,7 @@ rijndael.h
 Rijndael.pm
 Rijndael.xs
 t/00_load.t
+t/pod.t
+t/pod_coverage.t
 t/test_manifest
 typemap
