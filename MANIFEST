@@ -5,7 +5,6 @@ examples/README
 LICENSE
 Makefile.PL
 MANIFEST
-META.yml
 NEWS
 README
 rijndael.h
