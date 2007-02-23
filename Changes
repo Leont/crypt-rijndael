@@ -4,6 +4,12 @@
 	1444, 503).
 	* This module is now maintained by brian d foy (bdfoy@cpan.org)
 
+1.04 - Fri Feb 23 11:20:44 2007
+	* Adjusted rijndael.h to use __sun to identify Solaris boxes. GCC
+	uses __sun__ or __sun, but Solaris cc only uses __sun :
+	http://blogs.sun.com/morganh/date/20060928
+	* If you've already compiled this module, you don't need to upgrade
+
 1.03 - Thu Feb 22 15:42:04 2007
 	* Updated distro to include missing Pod tests
 	* No code changes
