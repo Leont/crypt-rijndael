@@ -34,15 +34,18 @@
 	#undef _CRYPT_RIJNDAEL_H_TYPES
 #endif
 
-/* Solaris has sys/types.h, but doesn't act like everyone else */
-#if defined( __sun__ )
+/* Solaris has sys/types.h, but doesn't act like everyone else 
+ * GCC defines __sun__ and __sun (report from Tom Ross)
+ * Solaris cc defines __sun
+ */
+#if defined( __sun__ ) || defined( __sun )
 	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef uint32_t UINT32;
-	typedef uint8_t UINT8;
+	typedef uint8_t  UINT8;
 #endif
 
 /* I expect this to be the usual case */
-#if ! defined(__sun__) && ( defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_) )   
+#if ! defined(_CRYPT_RIJNDAEL_H_TYPES) && ( defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_) )   
 	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef __uint32_t UINT32;
 	typedef __uint8_t  UINT8;
@@ -56,7 +59,7 @@
 
 #if defined(__MINGW32__) && ! defined(_CRYPT_RIJNDAEL_H_TYPES)
 	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef unsigned int UINT32;
+	typedef unsigned int  UINT32;
 	typedef unsigned char UINT8;
 #endif
 
@@ -73,7 +76,8 @@
 #endif	
 
 /* Other block sizes and key lengths are possible, but in the context of
- * the ssh protocols, 256 bits is the default. */
+ * the ssh protocols, 256 bits is the default. 
+ */
 #define RIJNDAEL_BLOCKSIZE 16
 #define RIJNDAEL_KEYSIZE   32
 
@@ -102,7 +106,8 @@ typedef struct {
  * bits).  If a value other than these three is specified, the key will be
  * truncated to the closest value less than the key size specified, e.g.
  * specifying 7 will use only the first 6 bytes of the key given.  DO NOT
- * PASS A VALUE LESS THAN 16 TO KEYSIZE! */
+ * PASS A VALUE LESS THAN 16 TO KEYSIZE! 
+ */
 void
 rijndael_setup(RIJNDAEL_context *ctx, size_t keysize, const UINT8 *key);
 
