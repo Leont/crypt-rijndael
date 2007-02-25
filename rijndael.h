@@ -35,7 +35,7 @@
 #endif
 
 /* Solaris has sys/types.h, but doesn't act like everyone else 
- * GCC defines __sun__ and __sun (report from Tom Ross)
+ * GCC defines __sun__ and __sun (report from Todd Ross)
  * Solaris cc defines __sun
  */
 #if defined( __sun__ ) || defined( __sun )
