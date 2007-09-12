@@ -7,7 +7,7 @@ SYNOPSIS
      # keysize() is 32, but 24 and 16 are also possible
      # blocksize() is 16
 
-     $cipher = Crypt::Rijndael->new( "a" x 32, Crypt::Rijndael::MODE_CBC );
+     $cipher = Crypt::Rijndael->new( "a" x 32, Crypt::Rijndael::MODE_CBC() );
 
      $cipher->set_iv($iv);
      $crypted = $cipher->encrypt($plaintext);
@@ -29,7 +29,7 @@ DESCRIPTION
         our bytes. 128 bits, is however, the AES-specified block size, so
         this is all we support.
 
-    $cipher = new $key [, $mode]
+    $cipher = Crypt::Rijndael->new( $key [, $mode] )
         Create a new "Crypt::Rijndael" cipher object with the given key
         (which must be 128, 192 or 256 bits long). The additional $mode
         argument is the encryption mode, either "MODE_ECB" (electronic
@@ -60,6 +60,7 @@ DESCRIPTION
     MODE_CTR - Counter mode
     MODE_ECB - Electronic cookbook mode
     MODE_OFB - Output feedback
+    MODE_PCBC - ignore this one for now :)
 
 SEE ALSO
     Crypt::CBC, http://www.csrc.nist.gov/encryption/aes/
