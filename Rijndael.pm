@@ -9,7 +9,7 @@ Crypt::Rijndael - Crypt::CBC compliant Rijndael encryption module
  # keysize() is 32, but 24 and 16 are also possible
  # blocksize() is 16
 
- $cipher = Crypt::Rijndael->new( "a" x 32, Crypt::Rijndael::MODE_CBC );
+ $cipher = Crypt::Rijndael->new( "a" x 32, Crypt::Rijndael::MODE_CBC() );
 
  $cipher->set_iv($iv);
  $crypted = $cipher->encrypt($plaintext);
@@ -31,7 +31,7 @@ use vars qw( $VERSION @ISA );
 
 require DynaLoader;
 
-$VERSION = '1.04';
+$VERSION = '1.04_01';
 @ISA = qw/DynaLoader/;
 
 bootstrap Crypt::Rijndael $VERSION;
@@ -49,7 +49,7 @@ algorithm actually supports any blocksize that is any multiple of
 our bytes.  128 bits, is however, the AES-specified block size,
 so this is all we support.
 
-=item $cipher = new $key [, $mode]
+=item $cipher = Crypt::Rijndael->new( $key [, $mode] )
 
 Create a new C<Crypt::Rijndael> cipher object with the given key
 (which must be 128, 192 or 256 bits long). The additional C<$mode>
@@ -93,6 +93,8 @@ Use these constants to select the cipher type:
 =item MODE_ECB - Electronic cookbook mode
 
 =item MODE_OFB - Output feedback
+
+=item MODE_PCBC - ignore this one for now :)
 
 =back
 

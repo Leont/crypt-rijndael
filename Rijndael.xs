@@ -30,13 +30,14 @@ BOOT:
 #if (PATCHLEVEL > 4) || ((PATCHLEVEL == 4) && (SUBVERSION >= 70))
   HV *stash = gv_stashpv("Crypt::Rijndael", 0);
 
-  newCONSTSUB (stash, "keysize",   newSViv (32));
-  newCONSTSUB (stash, "blocksize", newSViv (16));
-  newCONSTSUB (stash, "MODE_ECB",  newSViv (MODE_ECB));
-  newCONSTSUB (stash, "MODE_CBC",  newSViv (MODE_CBC));
-  newCONSTSUB (stash, "MODE_CFB",  newSViv (MODE_CFB));
-  newCONSTSUB (stash, "MODE_OFB",  newSViv (MODE_OFB));
-  newCONSTSUB (stash, "MODE_CTR",  newSViv (MODE_CTR));
+  newCONSTSUB (stash, "keysize",    newSViv (32)        );
+  newCONSTSUB (stash, "blocksize",  newSViv (16)        );
+  newCONSTSUB (stash, "MODE_ECB",   newSViv (MODE_ECB)  );
+  newCONSTSUB (stash, "MODE_CBC",   newSViv (MODE_CBC)  );
+  newCONSTSUB (stash, "MODE_CFB",   newSViv (MODE_CFB)  );
+  newCONSTSUB (stash, "MODE_PCBC",  newSViv (MODE_PCBC) );
+  newCONSTSUB (stash, "MODE_OFB",   newSViv (MODE_OFB)  );
+  newCONSTSUB (stash, "MODE_CTR",   newSViv (MODE_CTR)  );
 #endif
 }
 
@@ -74,6 +75,13 @@ int
 MODE_CFB(...)
   CODE:
      RETVAL=MODE_CFB;
+  OUTPUT:
+     RETVAL
+
+int
+MODE_PCBC(...)
+  CODE:
+     RETVAL=MODE_PCBC;
   OUTPUT:
      RETVAL
 
