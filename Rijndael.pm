@@ -31,7 +31,7 @@ use vars qw( $VERSION @ISA );
 
 require DynaLoader;
 
-$VERSION = '1.04_01';
+$VERSION = '1.04_02';
 @ISA = qw/DynaLoader/;
 
 bootstrap Crypt::Rijndael $VERSION;
