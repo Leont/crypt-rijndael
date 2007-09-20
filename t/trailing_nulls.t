@@ -4,7 +4,7 @@ use Crypt::Rijndael;
 use Devel::Peek;
 
 my $key = "a" x 32;
-my $cipher = new Crypt::Rijndael $key, Crypt::Rijndael::MODE_CBC;
+my $cipher = Crypt::Rijndael->new( $key, Crypt::Rijndael::MODE_CBC );
 mySub();
 
 sub mySub

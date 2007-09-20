@@ -21,8 +21,6 @@ t/ofb.t
 t/pcbc.t
 t/pod.t
 t/pod_coverage.t
-t/ref/cbc_d_m.t
 t/rt/27632.t
 t/test_manifest
-t/trailing_nulls.t
 typemap
