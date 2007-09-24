@@ -15,13 +15,13 @@ sub mySub
 
 #  my $plaintext = "text\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00";
 
-  print $plaintext,"\n";
+  diag $plaintext,"\n";
   Dump( $plaintext );
-  print join(',', unpack 'C*', $plaintext),"\n";
+  diag join(',', unpack 'C*', $plaintext),"\n";
 
   $plaintext =~ s/\x00+$//;
   
   Dump( $plaintext );
-  print $plaintext,"\n";
-  print join(',', unpack 'C*', $plaintext),"\n";
+  diag $plaintext,"\n";
+  diag join(',', unpack 'C*', $plaintext),"\n";
 }
