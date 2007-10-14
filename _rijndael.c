@@ -420,9 +420,9 @@ rijndael_encrypt(RIJNDAEL_context *ctx,
      tables. */
   for (j=0; j<4; j++) {
     e = wtxt[j] & 0xff;
-    e |= (wtxt[idx[1][j]]) & (0xff << 8);
-    e |= (wtxt[idx[2][j]]) & (0xff << 16);
-    e |= (wtxt[idx[3][j]]) & (0xff << 24);
+    e |= (wtxt[idx[1][j]]) & (0xff  << 8 );
+    e |= (wtxt[idx[2][j]]) & (0xff  << 16);
+    e |= (wtxt[idx[3][j]]) & (0xffU << 24);
     t[j] = e;
   }
   for (j=0; j<4; j++)
@@ -459,9 +459,9 @@ rijndael_decrypt(RIJNDAEL_context *ctx,
      tables. */
   for (j=0; j<4; j++) {
     e = wtxt[j] & 0xff;
-    e |= (wtxt[iidx[1][j]]) & (0xff << 8);
-    e |= (wtxt[iidx[2][j]]) & (0xff << 16);
-    e |= (wtxt[iidx[3][j]]) & (0xff << 24);
+    e |= (wtxt[iidx[1][j]]) & (0xff  << 8);
+    e |= (wtxt[iidx[2][j]]) & (0xff  << 16);
+    e |= (wtxt[iidx[3][j]]) & (0xffU << 24);
     t[j] = e;
   }
   for (j=0; j<4; j++)

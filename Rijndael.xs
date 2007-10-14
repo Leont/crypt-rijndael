@@ -125,7 +125,7 @@ new(class, key, mode=MODE_ECB)
 	  RETVAL->ctx.mode = RETVAL->mode = mode;
 	  /* set the IV to zero on initialization */
 	  memset(RETVAL->iv, 0, RIJNDAEL_BLOCKSIZE);
-          rijndael_setup(&RETVAL->ctx, keysize, SvPV_nolen(key));
+          rijndael_setup(&RETVAL->ctx, keysize, (UINT8 *) SvPV_nolen(key));
 
 	}
 	OUTPUT:
@@ -167,7 +167,7 @@ encrypt(self, data)
 	    SvPOK_only (RETVAL);
 	    SvCUR_set (RETVAL, size);
 	    (ix ? block_decrypt : block_encrypt)
-	      (&self->ctx, rawbytes, size, SvPV_nolen(RETVAL), self->iv);
+	      (&self->ctx, rawbytes, size, (UINT8 *) SvPV_nolen(RETVAL), self->iv);
           } else
             RETVAL = newSVpv ("", 0);
         }
