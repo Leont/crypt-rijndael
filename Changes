@@ -1,4 +1,9 @@
 
+1.05 - Fri Nov  9 05:39:09 2007
+	* This version fixes the signed integer problems that Solaris had.
+	* Now this module require perl 5.6.
+	* You don't need to upgrade if your system isn't Solaris.
+
 1.04 - Mon Oct 15 14:27:00 2007
 	* Quashed warnings about overflows by casting numbers to
 	unsigned ints.
