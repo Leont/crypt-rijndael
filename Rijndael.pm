@@ -29,9 +29,12 @@ package Crypt::Rijndael;
 use strict;
 use vars qw( $VERSION @ISA );
 
+use warnings;
+no warnings;
+
 require DynaLoader;
 
-$VERSION = '1.04_03';
+$VERSION = '1.05';
 @ISA = qw/DynaLoader/;
 
 bootstrap Crypt::Rijndael $VERSION;
