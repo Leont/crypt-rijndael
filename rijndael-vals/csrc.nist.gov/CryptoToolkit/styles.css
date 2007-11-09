@@ -1,0 +1,128 @@
+A:link {font-family: Arial, Verdana, Helvetica, sans-serif;	color: Blue}
+A:visited{font-family: Arial, Verdana, Helvetica, sans-serif;color:Blue}
+A:hover{font-family: Arial, Verdana, Helvetica, sans-serif;color:#CC0000}
+p.black2{
+
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: normal
+}
+a.black2:link {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: normal
+}
+a.black2:visited {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: normal
+}
+a.black2:hover {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: Blue;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: normal;
+	background-color : White;
+}
+a.black1:link {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: Black;
+	font-weight: normal;
+	line-height: normal;
+}
+a.black1:visited {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: Black;
+	font-weight: normal;
+	line-height: normal
+}
+a.black1:hover {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #CC0000;
+	font-weight: normal;
+	line-height: normal;
+	background-color : White;
+}
+a.black:link {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: normal
+}
+a.black:visited {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: normal
+}
+a.black:hover {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	color: Blue;
+	text-decoration: none;
+	font-weight: normal;
+	line-height: normal;
+	background-color : White;
+}
+a.white2:link {
+	color: #FFFFFF;
+	text-decoration: none;
+; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-weight: bold; font-size: 8pt
+}
+a.white2:visited {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #FFFFFF;
+	text-decoration: none;
+	font-weight: bold
+}
+a.white2:hover {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: Blue;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a.footer {	font-family: Arial, Verdana, Helvetica, sans-serif;	color: navy;	font-size: 9pt}
+a.footer:visited {	font-family: Arial, Verdana, Helvetica, sans-serif;	color: navy;	font-size: 9pt}
+a.footer:hover { font-family: Arial, Verdana, Helvetica, sans-serif; color: #CC0000; font-size: 9pt}
+blockquote{	font-family: Arial, Verdana, Geneva, sans-serif;	color: Black;	font-size: 10pt}
+font.white {
+color:white
+}
+font.smaller {font-size: 8pt}
+
+H1 {font-family: Arial, Verdana, Geneva, sans-serif; font-size: 14pt; color: #3366CC; font-weight: bold}
+H2 {font-family: Arial, Verdana, Geneva, sans-serif; font-size: 12pt; color: #3366CC; font-weight: bold}
+H3 {font-family: Arial, Verdana, Geneva, sans-serif; font-size: 11pt; color: #3366CC; font-weight: bold}
+H4 {font-family: Arial, Verdana, Geneva, sans-serif; font-size:  10pt; color: #3366CC; font-weight: bold}
+
+span {font-size: 10pt; font-family: Arial, Verdana, Geneva, sans-serif}
+
+BODY {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt; color: black; background-color: white}
+
+P.footer {font-family: Arial, Verdana, Helvetica, sans-serif; color: gray; font-size: 8pt}
+
+font.all {font-family: Arial, Verdana, Helvetica, sans-serif; font-size: 10pt; color: black}
+P { font-family: Arial, Verdana, Geneva, sans-serif;	color: Black;	font-size: 10pt} BR { font-family: Arial, Verdana, Geneva, sans-serif;	color: Black;	font-size: 10pt} LI { font-family: Arial, Verdana, Geneva, sans-serif;	color: Black;	font-size: 10pt} OL { font-family: Arial, Verdana, Geneva, sans-serif;	color: Black;	font-size: 10pt} TD  { font-family: Arial, Verdana, Geneva, sans-serif;	color: Black;	font-size: 10pt} UL { font-family: Arial, Verdana, Geneva, sans-serif;	color: Black;	font-size: 10pt} a.blue1:link { font-family: Arial, Verdana, Geneva, Helvetica, sans-serif; font-size: 10pt; color: #0000CC; font-weight: normal; line-height: normal; ; text-decoration: none}
+a.blue1:hover { font-family: Arial, Verdana, Geneva, Helvetica, sans-serif; font-size: 10pt; color: #CC0000; font-weight: normal; line-height: normal; background-color : White; }
+a.blue1:visited { font-family: Arial, Verdana, Geneva, Helvetica, sans-serif; font-size: 10pt; color: #0000CC; font-weight: normal; line-height: normal }

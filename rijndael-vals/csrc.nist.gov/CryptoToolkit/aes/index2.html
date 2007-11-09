@@ -1,0 +1,227 @@
+<HTML>
+
+<HEAD>
+	<TITLE>Advanced Encryption Standard (AES) Development Effort</TITLE>
+	<META NAME="description" CONTENT="AES Development Effort">
+	<META NAME="keywords" CONTENT="cryptographic security, cryptography, cryptology, cryptographic standards, Advanced Encryption Standard, AES, encryption, block cipher">
+
+</HEAD>
+
+<BODY background="/images/nist_background.gif" TEXT="#003366">
+
+<P><A HREF="http://www.nist.gov/"><IMG SRC="/images/logonavy.gif" NOSAVE  BORDER=0 ALT="NIST Home Page Button"></A> 
+</P>
+<H2><FONT color="#FF0033">***After February 28, 2001, these pages shall no longer 
+  be updated. All current AES-related information is available at <A href="http://www.nist.gov/aes/">http://www.nist.gov/aes/</A>.</FONT><BR>
+</H2>
+<CENTER>
+</CENTER>
+<P>
+
+<H1 ALIGN=CENTER>Advanced Encryption Standard (AES)<BR>
+  Development Effort</H1>
+<HR>
+<P>
+
+<TABLE>
+<TR><TD WIDTH=15% VALIGN=TOP>
+
+<!-- Menu Here -->
+
+	<TABLE BGCOLOR="#FFFFCC" BORDER=3 CELLSPACING=0 CELLPADDING=4>
+
+	<TR><TD BGCOLOR="#003366" ALIGN=CENTER><FONT COLOR="#FFFFCC"><I><B>GENERAL</B></I></FONT>
+	</TD></TR>
+
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="http://www.nist.gov/aes">AES Home Page</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/rijndael/">Rijndael Information</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="http://www.nist.gov/modes/">Modes of Operation</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="http://aes.nist.gov/aes/default.htm">Discussion Forum</A><BR>
+&nbsp;&nbsp;&nbsp;<A HREF="http://ryan.nist.gov:8080/aes/default.htm">(Archive: read-only)</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/index.html#news">Recent News</A>
+	</TD></TR>
+
+	<TR><TD BGCOLOR="#003366" ALIGN=CENTER><A HREF="/encryption/aes/round2/round2.htm"><FONT COLOR="#FFFFCC"><I><B>ROUND 2</B></I><BR><I>(8/1999-5/2000)</I></FONT>
+	</A></TD></TR>
+
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif"  ALT="button"> <A HREF="/encryption/aes/round2/round2.htm">Finalist Algorithms</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/round2/r2anlsys.htm">Round 2 Analysis</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/round2/pubcmnts.htm">Round 2 Comments</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/round2/conf3/aes3conf.htm">3<SUP>rd</SUP> AES Conference</A>
+	</TD></TR>
+
+	<TR><TD BGCOLOR="#003366" ALIGN=CENTER><A HREF="/encryption/aes/round1/round1.htm"><FONT COLOR="#FFFFCC"><I><B>ROUND 1</B></I><BR><I>(8/1998-4/1999)</I></FONT></A>
+	</TD></TR>
+
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/round1/round1.htm#algorithms">R1 Algorithms</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/round1/round1.htm#FedReg">R1 Announcement</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/round1/pubcmnts.htm">R1 Comments</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/round1/conf2/aes2conf.htm">2<SUP>nd</SUP> AES Conference</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/round1/conf1/aes1conf.htm">1<SUP>st</SUP> AES Conference</A>
+	</TD></TR>
+
+	<TR><TD BGCOLOR="#003366" ALIGN=CENTER><A HREF="/encryption/aes/pre-round1/earlyaes.htm"><FONT COLOR="#FFFFCC"><I><B>Pre-ROUND 1</B></I><BR><I>(1/1997-7/1998)</I></FONT>
+	</A></TD></TR>
+
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/pre-round1/earlyaes.htm#candidatecall">Call for Candidates</A>
+	</TD></TR>
+	<TR VALIGN=MIDDLE><TD><IMG SRC="/images/ball_blu.gif" ALT="button"> <A HREF="/encryption/aes/pre-round1/earlyaes.htm">AES Beginnings</A>
+	</TD></TR>
+
+	</TABLE>
+
+<!-- Table updated October 24, 2000 -->
+
+
+</TD>
+
+
+<TD WIDTH=5%>
+</TD>
+
+<TD VALIGN=TOP>
+
+<P>
+
+<CENTER>
+<TABLE BORDER=6 CELLSPACING=0 CELLPADDING=8 BGCOLOR="#FFFFCC" WIDTH=90%>
+	<TR>
+		<TD JUSTIFY=FULL><FONT SIZE=+2><CENTER><B>*** RIJNDAEL ***</B><P> Selected by NIST<br>for the Proposed AES</CENTER></FONT><P>
+
+<DIR>
+
+	<UL>
+		<LI><A HREF="http://www.nist.gov/public_affairs/releases/g00-176.htm">Press Release</A>
+		<LI><A HREF="/encryption/aes/round2/aesfact.html">AES Fact Sheet</A> (please review before contacting NIST with questions!)
+<!--		<LI><A HREF="http://real.nist.gov/aes_briefing.htm">Official press briefing of NIST's selection.</A> -->
+		<LI>NIST's <A HREF="/encryption/aes/round2/r2report.pdf">Report on the Development of the Advanced Encryption Standard (AES)</A>, which summarizes NIST's selection and the public comments, is now available.
+		<LI><A HREF="/encryption/aes/rijndael/">Rijndael information</A> (specifications, code, test values, etc.)
+		<LI>NIST has registered <A HREF="http://csrc.nist.gov/csor/algorithms.htm">AES OIDs</A>, and an ASN.1 module is now available.
+	</UL>
+</DIR>
+&nbsp;<P>
+	</TD>
+	</TR>
+</TABLE>
+</CENTER>
+
+<P>
+<A NAME="news"></A>
+<H2>Recent Announcements</H2>
+
+<P><B><I>October 2, 2000</I></B> - <FONT SIZE=+1 COLOR="#FF0000">NIST announces that <B>Rijndael</B> has been selected as the proposed AES.</FONT>
+
+<P><B><I>September 29, 2000</I></B> - <FONT SIZE=+1 COLOR="#FF0000">Information on the October 20, 2000 <A HREF="http://www.nist.gov/modes/">Modes of Operation Workshop</A> is still available, and <A HREF="mailto:EncryptionModes@nist.gov">comments</A> are invited.</FONT>
+<P><B><I>August 7, 2000</I></B> - <A HREF="round2/r2anlsys.htm#NSA">VHDL models</A> developed by NSA to evaluate the hardware performance of the five finalists is available.
+
+
+
+<P><A HREF="othernews.html">Additional AES "News"</A> from Round 2.
+
+<P>
+<HR WIDTH=50% SIZE=3>
+<P>
+<HR WIDTH=80%>
+<P>
+<TABLE BORDER=6 CELLSPACING=0 CELLPADDING=4 BGCOLOR="#FFFFCC" >
+	<TR>
+		<TD ALIGN=CENTER VALIGN=CENTER><STRONG><FONT COLOR="#FF0000">SPECIAL NOTE - Intellectual Property</FONT></STRONG>
+		</TD>
+	</TR>
+	<TR>
+		<TD JUSTIFY=FULL><FONT COLOR="#FF0000">NIST reminds all interested parties that the adoption of AES is being conducted as an open standards-setting activity. Specifically, NIST has requested that all interested parties identify to NIST any patents or inventions that may be required for the use of AES. NIST hereby gives public notice that it may seek redress under the antitrust laws of the United States against any party in the future who might seek to exercise patent rights against any user of AES that have not been disclosed to NIST in response to this request for information.
+
+		</FONT></TD>
+	</TR>
+</TABLE>
+<P>
+<HR WIDTH=80%>
+      <H2><A name="overview"></A>Overview of the AES Development Effort</H2>
+      <I>February 2001</I> 
+      <P>
+
+The <A HREF="http://www.nist.gov/">National Institute of Standards and Technology (NIST)</A> has been working with industry and the cryptographic community to develop an Advanced Encryption Standard (AES).  The overall goal is to develop a Federal Information Processing Standard (FIPS) that specifies an encryption algorithm(s) capable of protecting sensitive government information well into the next century.  The algorithm(s) is expected to be used by the U.S. Government and, on a voluntary basis, by the private sector.<P>
+
+On January 2, 1997, NIST announced the <A HREF="pre-round1/aes_9701.txt">initiation of the AES development effort</A> and made a formal  <A HREF="pre-round1/aes_9709.htm">call for algorithms</A> on September 12, 1997.  The call stipulated that the AES would specify an unclassified, publicly disclosed encryption algorithm(s), available royalty-free, worldwide.   In addition, the algorithm(s) must implement symmetric key cryptography as a block cipher and (at a minimum) support block sizes of 128-bits and key sizes of 128-, 192-, and 256-bits.<P>
+
+On August 20, 1998, NIST announced a group of <A HREF="round1/round1.htm#algorithms">fifteen AES candidate algorithms</A> at the <A HREF="round1/conf1/aes1conf.htm">First AES Candidate Conference (AES1)</A>.  These algorithms had been submitted by members of the cryptographic community from around the world.  At that conference and in a simultaneously published <A HREF="round1/aes_9809.htm">Federal Register notice</A>, NIST solicited public comments on the candidates.  A <A HREF="round1/conf2/aes2conf.htm">Second AES Candidate Conference (AES2)</A> was held in March 1999 to discuss the results of the analysis conducted by the global cryptographic community on the candidate algorithms.   The public comment period on the initial review of the algorithms closed on April 15, 1999.  Using the <A HREF="round1/pubcmnts.htm">analyses and comments received</A>, NIST selected five algorithms from the fifteen.
+      <P> The AES <A HREF="round2/round2.htm#algorithms">finalist candidate algorithms</A> 
+        were <B>MARS, RC6, Rijndael, Serpent, and Twofish</B>, and NIST developed 
+        a <A HREF="round2/round2.htm#NIST">Round 1 Report</A> describing the selection 
+        of the finalists.
+      <P> These finalist algorithms received further analysis during a second, 
+        more in-depth review period prior to the selection of the final algorithm(s) 
+        for the AES FIPS. Until May 15, 2000, NIST solicited public comments on 
+        the remaining algorithms. Comments and analysis were actively sought by 
+        NIST on any aspect of the candidate algorithms, including, - but not limited 
+        to, - the following topics: cryptanalysis, intellectual property, crosscutting 
+        analyses of all of the AES finalists, overall recommendations and implementation 
+        issues. An informal <A HREF="http://aes.nist.gov/aes/default.htm">AES 
+        discussion forum</A> was also provided by NIST for interested parties 
+        to discuss the AES finalists and relevant AES issues.
+      <P> Near the end of Round 2, NIST sponsored the <A HREF="round2/conf3/aes3conf.htm">Third 
+        AES Candidate Conference (AES3)</A> - an open, public forum for discussion 
+        of the analyses of the AES finalists. AES3 was held April 13-14, 2000 
+        in New York, NY, USA. Submitters of the AES finalists were invited to 
+        attend and engage in discussions regarding comments on their algorithms. 
+        The <A HREF="round2/conf3/aes3agenda.html">final agenda</A> for AES3 includes 
+        links to the accepted papers, their presentations (if available), the 
+        submitter statements, and the submitter presentations. All papers proposed 
+        for AES3 were considered as <A HREF="round2/pubcmnts.htm">official Round 
+        2 public comments</A>.
+      <P>
+
+After the close of the Round 2 public analysis period on May 15, 2000, NIST studied all available information in order to make a selection for the AES. On October 2, 2000, NIST announced that it has selected <B>Rijndael</B> to propose for the AES.  A <A HREF="/encryption/aes/round2/r2report.pdf">report</A>, <A HREF="http://www.nist.gov/public_affairs/releases/g00-176.htm">press release</A>, and <A HREF="/encryption/aes/round2/aesfact.html">AES fact sheet</A> are available with that information.
+      <P> After the announcement, NIST began preparing a draft Federal Information 
+        Processing Standard (FIPS) for the AES, which was published for public 
+        review and comment in February 2001. Following the 90-day comment period, 
+        the draft standard will be revised by NIST, as appropriate, in response 
+        to public comments. A review, approval, and promulgation process will 
+        then follow. If all steps of the AES development process proceed as planned, 
+        it is anticipated that the standard will be completed by the summer of 
+        2001. At the time that NIST publishes the AES standard, it is intended 
+        that validation testing (i.e., conformance testing) for AES implementations 
+        will be available through NIST's <A HREF="http://csrc.nist.gov/cryptval/">Cryptographic 
+        Module Validation Program</A>.
+      <P>
+
+
+
+<HR WIDTH=80%>
+<P>
+
+
+
+
+<P>
+
+</TD></TR>
+</TABLE>
+<P>
+
+<HR>
+<P> <I>Last Modified: February 28, 2001</I> 
+<P><I><A HREF="mailto:dworkin@nist.gov?subject=AES">Questions?</A></I> <BR>
+  <I><A HREF="mailto:philip.bulman@nist.gov?subject=AES">Press Contacts</A></I>
+<P><SMALL><I><A HREF="http://www.nist.gov/itl/div893/">Computer Security Division</A>
+<BR><A HREF="http://www.nist.gov/">National Institute of Standards and Technology</A>
+
+<P>NIST is an agency of the <A HREF="http://www.doc.gov/">U.S. Commerce Department's</A> <A HREF="http://www.ta.doc.gov/">Technology Administration</A>
+<P><A HREF="http://www.nist.gov/public_affairs/privacy.htm">NIST Privacy Statement/Security 
+  Notice</A> <BR>
+  <A HREF="http://www.nist.gov/public_affairs/disclaim.htm">NIST Disclaimer and 
+  Privacy Notice</A> 
+</I></SMALL>
+</BODY>
+</HTML>
