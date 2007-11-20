@@ -1,4 +1,8 @@
 
+1.05_01 - Tue Nov 20 07:59:26 2007
+	* Updated rijndael.h to handle Mac OS X Panther.
+	* No need to upgrade if you already have this installed.
+
 1.05 - Fri Nov  9 05:39:09 2007
 	* This version fixes the signed integer problems that Solaris had.
 	* Now this module requires perl 5.6.
