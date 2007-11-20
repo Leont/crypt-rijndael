@@ -23,7 +23,7 @@ WriteMakefile(
 			'Rijndael.pm' => '$(INST_MAN3DIR)/Crypt::Rijndael.3',
 			},
 
-	clean          => { FILES    => q|*.bak Crypt-*| },
+	clean          => { FILES    => q|*.bak *.old Crypt-*| },
 
 	dist	       => {
 	            PREOP	=> 'pod2text Rijndael.pm | tee README >$(DISTVNAME)/README; chmod -R u=rwX,go=rX . ;',

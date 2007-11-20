@@ -44,6 +44,22 @@
 	typedef uint8_t  UINT8;
 #endif
 
+/* Mac OS X 10.3 defines things differently than most other 
+systems */
+#if defined( __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ ) &&  __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__-0 < 1140
+	#define _CRYPT_RIJNDAEL_H_TYPES
+	typedef u_int32_t UINT32;
+	typedef u_char    UINT8;
+#endif
+
+/* Mac OS X 10.3 defines things differently than most other
+systems */
+#if defined(__APPLE__) && ! defined(__DARWIN_UNIX03)
+	#define _CRYPT_RIJNDAEL_H_TYPES
+	typedef u_int32_t UINT32;
+	typedef u_char Ê ÊUINT8;
+#endif
+
 /* I expect this to be the usual case */
 #if ! defined(_CRYPT_RIJNDAEL_H_TYPES) && ( defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_) )   
 	#define _CRYPT_RIJNDAEL_H_TYPES
