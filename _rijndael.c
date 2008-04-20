@@ -523,11 +523,11 @@ block_encrypt(RIJNDAEL_context *ctx, UINT8 *input, int inputlen,
 	  input[RIJNDAEL_BLOCKSIZE*i + j];
       }
       block[RIJNDAEL_BLOCKSIZE-1]++;
-      carry_flg = block[RIJNDAEL_BLOCKSIZE-1] ? 0 : 1;
+      carry_flg = block[RIJNDAEL_BLOCKSIZE-1] != 0 ? 0 : 1;
       for (j=RIJNDAEL_BLOCKSIZE-2; j>=0; j--) {
 	if (carry_flg) {
 	  block[j]++;
-          carry_flg = block[j] ? 0 : 1;
+          carry_flg = block[j] != 0 ? 0 : 1;
         } else
 	  break;
       }
@@ -599,11 +599,11 @@ block_decrypt(RIJNDAEL_context *ctx, UINT8 *input, int inputlen,
 	  input[RIJNDAEL_BLOCKSIZE*i + j];
       }
       block[RIJNDAEL_BLOCKSIZE-1]++;
-      carry_flg = block[RIJNDAEL_BLOCKSIZE-1] ? 0 : 1;
+      carry_flg = block[RIJNDAEL_BLOCKSIZE-1] != 0 ? 0 : 1;
       for (j=RIJNDAEL_BLOCKSIZE-2; j>=0; j--) {
 	if (carry_flg) {
 	  block[j]++;
-          carry_flg = block[j] ? 0 : 1;
+          carry_flg = block[j] != 0 ? 0 : 1;
         } else
 	  break;
       }

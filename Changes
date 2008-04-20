@@ -1,6 +1,6 @@
 
 1.05_01 - Tue Nov 20 07:59:26 2007
-	* Updated rijndael.h to handle Mac OS X Panther.
+	* Updated rijndael.h to handle Mac OS X Panther, thanks to John Fong.
 	* No need to upgrade if you already have this installed.
 
 1.05 - Fri Nov  9 05:39:09 2007
@@ -12,15 +12,14 @@
 	* Quashed warnings about overflows by casting numbers to
 	unsigned ints.
 	* This compiles warning-free and passes all tests on
-	Solaris 10 with gcc 3.4.6, so it might take care of RT
-	# 27632
+	Solaris 10 with gcc 3.4.6, so it might take care of RT#27632
 
 1.04_02 - Wed Sep 19 19:24:06 2007
 	* remove test files that shouldn't be there
 
 1.04_01 - Wed Sep 12 15:34:24 2007
 	* This developer release explores the Solaris bug noted in 
-	RT # 27632. Some Solaris installations may be encrypting or
+	RT#27632. Some Solaris installations may be encrypting or
 	decrpyting incorrectly.
 
 1.04 - Fri Feb 23 11:20:44 2007
