@@ -1,4 +1,10 @@
 
+1.06 - Wed Apr 23 13:14:34 2008
+	* This release has a compiler-bug workaround for Sun C 5.9
+	identified by Andy Armstrong. No, really, it was a compiler
+	bug: http://in.opensolaris.org/jive/thread.jspa?threadID=53641&tstart=0
+	* You don't need to upgrade if you already have 1.05.
+
 1.05_02 - Sun Apr 20 15:26:21 2008
 	* This is a workaround for a Solaris compiler bug, but let's
 	see what CPAN Testers does with it.
