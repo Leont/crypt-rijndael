@@ -1,7 +1,7 @@
 
 1.05_02 - Sun Apr 20 15:26:21 2008
-	* This is a workaround for a Solaris compiler bug, but let
-	s see what CPAN Testers does with it.
+	* This is a workaround for a Solaris compiler bug, but let's
+	see what CPAN Testers does with it.
 
 1.05_01 - Tue Nov 20 07:59:26 2007
 	* Updated rijndael.h to handle Mac OS X Panther, thanks to John Fong.
