@@ -34,6 +34,17 @@
 	#undef _CRYPT_RIJNDAEL_H_TYPES
 #endif
 
+/* Irix. ÊWe could include stdint.h and use uint8_t but that also
+ * requires that we specifically drive the compiler in C99 mode.
+ * Defining UINT8 as unsigned char is, ultimately, what stdint.h
+ * would do anyway.
+ */
+#if defined(_SGIAPI)
+ Ê Ê Ê #define _CRYPT_RIJNDAEL_H_TYPES
+ Ê Ê Ê typedef __uint32_t Ê ÊUINT32;
+ Ê Ê Ê typedef unsigned char UINT8;
+#endif
+
 /* Solaris has sys/types.h, but doesn't act like everyone else 
  * GCC defines __sun__ and __sun (report from Todd Ross)
  * Solaris cc defines __sun
