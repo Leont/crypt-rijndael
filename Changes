@@ -1,4 +1,8 @@
 
+1.06_02 - Thu Jun 19 11:55:21 2008
+	* Removed wide chars from the header file. Some compilers 
+	like to complain about things that are wrong. :(
+
 1.06_01 - Wed Jun 18 09:37:34 2008
 	This is a test of a fix for Irix.
 
