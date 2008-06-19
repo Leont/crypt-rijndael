@@ -34,15 +34,15 @@
 	#undef _CRYPT_RIJNDAEL_H_TYPES
 #endif
 
-/* Irix. ÊWe could include stdint.h and use uint8_t but that also
+/* Irix. We could include stdint.h and use uint8_t but that also
  * requires that we specifically drive the compiler in C99 mode.
  * Defining UINT8 as unsigned char is, ultimately, what stdint.h
  * would do anyway.
  */
 #if defined(_SGIAPI)
- Ê Ê Ê #define _CRYPT_RIJNDAEL_H_TYPES
- Ê Ê Ê typedef __uint32_t Ê ÊUINT32;
- Ê Ê Ê typedef unsigned char UINT8;
+	#define _CRYPT_RIJNDAEL_H_TYPES
+	typedef __uint32_t    UINT32;
+	typedef unsigned char UINT8;
 #endif
 
 /* Solaris has sys/types.h, but doesn't act like everyone else 
@@ -68,7 +68,7 @@ systems */
 #if defined(__APPLE__) && ! defined(__DARWIN_UNIX03)
 	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef u_int32_t UINT32;
-	typedef u_char Ê ÊUINT8;
+	typedef u_char    UINT8;
 #endif
 
 /* I expect this to be the usual case */
