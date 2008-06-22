@@ -1,4 +1,8 @@
 
+1.06_03 - Sun Jun 22 11:32:46 2008
+	* Trying the __sgi definition. If this doesn't make things
+	blow up, this release will get bumped to 1.07.
+
 1.06_02 - Thu Jun 19 11:55:21 2008
 	* Removed wide chars from the header file. Some compilers 
 	like to complain about things that are wrong. :(
