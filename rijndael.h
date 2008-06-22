@@ -39,7 +39,7 @@
  * Defining UINT8 as unsigned char is, ultimately, what stdint.h
  * would do anyway.
  */
-#if defined(_SGIAPI)
+#if defined(_SGIAPI) || defined( __sgi )
 	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef __uint32_t    UINT32;
 	typedef unsigned char UINT8;
