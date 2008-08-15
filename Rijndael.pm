@@ -34,7 +34,7 @@ no warnings;
 
 require DynaLoader;
 
-$VERSION = '1.06_03';
+$VERSION = '1.07';
 @ISA = qw/DynaLoader/;
 
 bootstrap Crypt::Rijndael $VERSION;
