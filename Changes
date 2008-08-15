@@ -1,4 +1,8 @@
 
+1.07 - Fri Aug 15 16:53:36 2008
+	* Fixed the odd character problems in some of the files
+	* No need to upgrade if you already have this installed
+
 1.06_03 - Sun Jun 22 11:32:46 2008
 	* Trying the __sgi definition. If this doesn't make things
 	blow up, this release will get bumped to 1.07.
