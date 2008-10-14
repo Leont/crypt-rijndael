@@ -1,4 +1,8 @@
 
+1.07_01 - Tue Oct 14 08:59:58 2008
+	* Clarify that these files are under the Lesser GNU Public License
+	(also known as the Library GNU Public License).
+
 1.07 - Fri Aug 15 16:53:36 2008
 	* Fixed the odd character problems in some of the files
 	* No need to upgrade if you already have this installed
