@@ -1,2 +1,9 @@
 *.old
 *.old
+Crypt-*
+*.bs
+Rijndael.c
+*.o
+pm_to_blib
+blib
+Makefile
