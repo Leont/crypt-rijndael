@@ -1,4 +1,9 @@
 
+1.07_02 - Tue Nov  4 02:21:27 2008
+	* RT #40511: Give a better warning when you try to use tainted
+	data as an initialization vector. If anyone wants to use 
+	tainted data, they can patch the code to accept it.
+
 1.07_01 - Tue Oct 14 08:59:58 2008
 	* Clarify that these files are under the Lesser GNU Public License
 	(also known as the Library GNU Public License).
