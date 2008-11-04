@@ -132,7 +132,7 @@ new(class, key, mode=MODE_ECB)
           STRLEN keysize;
           
           if (!SvPOK (key))
-            croak("key must be a string scalar");
+            croak("key must be an untainted string scalar");
 
           keysize = SvCUR(key);
 
