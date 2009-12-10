@@ -7,3 +7,4 @@ Rijndael.c
 pm_to_blib
 blib
 Makefile
+*.bak
