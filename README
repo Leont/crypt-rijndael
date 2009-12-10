@@ -77,6 +77,11 @@ AUTHOR
     and has been selected as the US Government's Advanced Encryption
     Standard.
 
+SOURCE
+    This code is in Github:
+
+            git://github.com/briandfoy/crypt-rijndael.git
+
 LICENSE
     This software is licensed under the Lesser GNU Public License. See the
     included COPYING file for details.
