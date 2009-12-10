@@ -1,4 +1,8 @@
 
+1.08 - Wed Dec  9 18:20:22 2009
+	* Promoting development release to full release.
+	* This release mainly clarifies the licensing.
+
 1.07_02 - Tue Nov  4 02:21:27 2008
 	* RT #40511: Give a better warning when you try to use tainted
 	data as an initialization vector. If anyone wants to use 
