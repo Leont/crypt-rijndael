@@ -1,15 +1,13 @@
-# $Id$
-
 require 5.006;
 
 use ExtUtils::MakeMaker;
 
-eval "use Test::Manifest 1.14";
+eval "use Test::Manifest 1.21";
 
 WriteMakefile(
 	'NAME'           => "Crypt::Rijndael",
     'VERSION_FROM'   => "Rijndael.pm",
-	'LICENSE'        => 'gpl',
+	'LICENSE'        => 'lgpl',
 	'AUTHOR'         => 'Rafael R. Sevilla (maintained by brian d foy <bdfoy@cpan.org>)',
 	'ABSTRACT'       => 'Crypt::CBC compliant Rijndael encryption module',
 	
