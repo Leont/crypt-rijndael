@@ -1,7 +1,4 @@
 
-1.08 - Sun Jan 17 11:57:17 2010
-	* Clarify in Makefile.PL that the license is the LGPL.
-
 1.08 - Wed Dec  9 18:20:22 2009
 	* Promoting development release to full release.
 	* This release mainly clarifies the licensing.
