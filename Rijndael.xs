@@ -131,8 +131,13 @@ new(class, key, mode=MODE_ECB)
         {
           STRLEN keysize;
           
-          if (!SvPOK (key))
-            croak("key must be an untainted string scalar");
+	  /* The taintedness of key always make SvPOK false
+	     See http://www.nntp.perl.org/group/perl.perl5.porters/2004/06/msg92344.html
+	     To counteract this, we use the complement test.
+	  */
+          /* if (!SvPOK (key)) */
+	  if( SvIOK(key) || SvNOK(key) )
+            croak("key is an Int or a Double. Must be a string scalar");
 
           keysize = SvCUR(key);
 
