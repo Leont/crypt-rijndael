@@ -1,4 +1,3 @@
-# $Id$
 00_load.t
 pod.t
 pod_coverage.t
@@ -12,3 +11,4 @@ pcbc.t
 #ref/cbc_d_m.t
 rt/27632.t
 #bad_iv.t
+taint.t
