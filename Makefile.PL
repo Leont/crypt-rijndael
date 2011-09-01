@@ -1,4 +1,4 @@
-require 5.006;
+require 5.010;
 
 use ExtUtils::MakeMaker;
 
@@ -13,9 +13,8 @@ WriteMakefile(
 	
 	'PREREQ_PM'    => { 
 			'Test::More'         => '0',
-			'Test::Manifest'     => '1.14',
+			'Test::Taint'        => '0',
 			},
-
 
 	'MAN3PODS'     => {
 			'Rijndael.pm' => '$(INST_MAN3DIR)/Crypt::Rijndael.3',
