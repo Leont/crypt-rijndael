@@ -2,23 +2,17 @@
 use strict;
 use warnings;
 
+use Taint::Util qw(taint tainted);
+
 $ENV{PATH} = '/usr/bin';
 
 use Test::More;
-
-use Scalar::Util qw(tainted);
 
 my $class = 'Crypt::Rijndael';
 use_ok( $class );
 
 my $plaintext = chr(0) x 32;
-my( $command ) = "perl -v" =~ m/(.*)/g;
-ok( ! tainted($command), 'command is not tainted' );
-
-my $tainted_string = `$command`;
-
-$plaintext .= $tainted_string;
-$plaintext = substr $plaintext, 0, 32;
+taint( $plaintext );
 ok( tainted($plaintext), 'plaintext is tainted' );
 
 for ( my $i = 0; $i < 32; $i++ ) {
@@ -26,10 +20,18 @@ for ( my $i = 0; $i < 32; $i++ ) {
 	}
 
 my $key = chr(0) x 32;
-$key .= $tainted_string;
-$key = substr $plaintext, 0, 32;
-ok( tainted($key), 'key is tainted' );
 substr( $key, 0, 1 ) = chr(1);
+
+my $tainted_key = $key;
+taint( $tainted_key );
+
+subtest 'tainted_key' => sub {
+	my $crypt = eval { $class->new( $tainted_key ) };
+	my $at = $@;
+	ok( defined $at, 'There is something in $@' );
+	ok( ! defined $crypt, q(No object was created) );
+	like( $at, qr/key must be an untainted string/, 'Gets tainted key error' );
+	};
 
 subtest 'ECB' => sub {
 	my $ecb = $class->new( $key );
