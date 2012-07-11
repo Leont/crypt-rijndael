@@ -1,1 +1,5 @@
 MYMETA*
+Makefile
+*.bs
+*.c
+*.o
