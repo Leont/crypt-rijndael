@@ -1,4 +1,7 @@
 
+1.10 - Wed Jul 11 19:25:12 2012
+	* Add MirBSD support. It's the same options as Sun stuff.
+
 1.08 - Wed Dec  9 18:20:22 2009
 	* Promoting development release to full release.
 	* This release mainly clarifies the licensing.
