@@ -48,8 +48,9 @@
 /* Solaris has sys/types.h, but doesn't act like everyone else 
  * GCC defines __sun__ and __sun (report from Todd Ross)
  * Solaris cc defines __sun
+ * MirBSD defines the same types as Solaris
  */
-#if defined( __sun__ ) || defined( __sun )
+#if defined( __sun__ ) || defined( __sun ) || defined( __MirBSD__ )
 	#define _CRYPT_RIJNDAEL_H_TYPES
 	typedef uint32_t UINT32;
 	typedef uint8_t  UINT8;
