@@ -126,8 +126,8 @@ This code is in Github:
 	
 =head1 LICENSE
 
-This software is licensed under the Lesser GNU Public License. See the included
-COPYING file for details.
+This software is licensed under the Lesser GNU Public License v3 (29
+June 2007). See the included COPYING file for details.
 
 =cut
 
