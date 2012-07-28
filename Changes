@@ -1,4 +1,7 @@
 
+1.11 - Sat Jul 28 16:09:37 2012
+	* Clarify the license as LGPL v3 (29 June 2007) (RT 78629)
+
 1.10 - Wed Jul 11 19:25:12 2012
 	* Add MirBSD support. It's the same options as Sun stuff.
 
