@@ -3,3 +3,6 @@ Makefile
 *.bs
 *.c
 *.o
+blib
+pm_to_blib
+*.bak
