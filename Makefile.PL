@@ -20,6 +20,11 @@ WriteMakefile(
 	'MAN3PODS'     => {
 			'Rijndael.pm' => '$(INST_MAN3DIR)/Crypt::Rijndael.3',
 			},
+	'META_MERGE'     => {
+		'resources' => {
+			'repository' => 'https://github.com/briandfoy/crypt-rijndael',
+		},
+	},
 
 	clean          => { FILES    => q|*.bak *.old Crypt-*| },
 
