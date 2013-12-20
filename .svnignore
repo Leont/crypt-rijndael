@@ -1,8 +1,0 @@
-Makefile.old
-pm_to_blib
-blib
-Crypt-*
-*gz
-Makefile
-Rijndael.bs
-Rijndael.c
