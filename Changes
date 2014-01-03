@@ -1,4 +1,7 @@
 
+1.12 - Fri Jan  3 17:36:10 2014
+	* Get rid of MYMETA
+
 1.11 - Sat Jul 28 16:09:37 2012
 	* Clarify the license as LGPL v3 (29 June 2007) (RT 78629)
 
