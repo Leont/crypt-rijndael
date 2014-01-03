@@ -67,3 +67,6 @@ Rijndael.c$
 t/trailing_nulls.t
 ref/.*
 rijndael-vals
+
+.*\.o$
+.*\.bs$
