@@ -14,7 +14,7 @@
 
 1.07_02 - Tue Nov  4 02:21:27 2008
 	* RT #40511: Give a better warning when you try to use tainted
-	data as an initialization vector. If anyone wants to use 
+	data as an initialization vector. If anyone wants to use
 	tainted data, they can patch the code to accept it.
 
 1.07_01 - Tue Oct 14 08:59:58 2008
@@ -30,7 +30,7 @@
 	blow up, this release will get bumped to 1.07.
 
 1.06_02 - Thu Jun 19 11:55:21 2008
-	* Removed wide chars from the header file. Some compilers 
+	* Removed wide chars from the header file. Some compilers
 	like to complain about things that are wrong. :(
 
 1.06_01 - Wed Jun 18 09:37:34 2008
@@ -68,7 +68,7 @@
 	* remove test files that shouldn't be there
 
 1.04_01 - Wed Sep 12 15:34:24 2007
-	* This developer release explores the Solaris bug noted in 
+	* This developer release explores the Solaris bug noted in
 	RT#27632. Some Solaris installations may be encrypting or
 	decrpyting incorrectly.
 
@@ -121,10 +121,10 @@
 0.06_03 - Wed Nov 15 11:07:08 2006
 	* Re-jiggered logic to define UINT32 and UINT8. First I'll try
 	sys/types.h, then check if they are already defined elsewhere, and
-	lastly hardcode the typedefs based on platform. The previous 
+	lastly hardcode the typedefs based on platform. The previous
 	release (0.06_02) had some problems on Windows from conflicting
 	typedefs (similar to the cygwin problems with libjpeg and X), so
-	I guard my typedefs by checking for previous definitions. Let's 
+	I guard my typedefs by checking for previous definitions. Let's
 	hope those previous definitions are right :)
 
 0.06_02 - Sun Nov 12 16:23:07 2006
