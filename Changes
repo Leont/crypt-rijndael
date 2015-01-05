@@ -1,3 +1,4 @@
+# Changes to Crypt::Rijndael
 
 1.12 - Fri Jan  3 17:36:10 2014
 	* Get rid of MYMETA
