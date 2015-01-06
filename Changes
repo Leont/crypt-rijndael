@@ -1,125 +1,125 @@
 Revision history for Perl module Crypt::Rijndael
 
-1.12 - Fri Jan  3 17:36:10 2014
+1.12 - 2014-01-03
 	* Get rid of MYMETA
 
-1.11 - Sat Jul 28 16:09:37 2012
+1.11 - 2012-07-28
 	* Clarify the license as LGPL v3 (29 June 2007) (RT 78629)
 
-1.10 - Wed Jul 11 19:25:12 2012
+1.10 - 2012-07-11
 	* Add MirBSD support. It's the same options as Sun stuff.
 
-1.08 - Wed Dec  9 18:20:22 2009
+1.08 - 2009-12-09
 	* Promoting development release to full release.
 	* This release mainly clarifies the licensing.
 
-1.07_02 - Tue Nov  4 02:21:27 2008
+1.07_02 - 2008-11-04
 	* RT #40511: Give a better warning when you try to use tainted
 	data as an initialization vector. If anyone wants to use
 	tainted data, they can patch the code to accept it.
 
-1.07_01 - Tue Oct 14 08:59:58 2008
+1.07_01 - 2008-10-14
 	* Clarify that these files are under the Lesser GNU Public License
 	(also known as the Library GNU Public License).
 
-1.07 - Fri Aug 15 16:53:36 2008
+1.07 - 2008-08-15
 	* Fixed the odd character problems in some of the files
 	* No need to upgrade if you already have this installed
 
-1.06_03 - Sun Jun 22 11:32:46 2008
+1.06_03 - 2008-06-22
 	* Trying the __sgi definition. If this doesn't make things
 	blow up, this release will get bumped to 1.07.
 
-1.06_02 - Thu Jun 19 11:55:21 2008
+1.06_02 - 2008-06-19
 	* Removed wide chars from the header file. Some compilers
 	like to complain about things that are wrong. :(
 
-1.06_01 - Wed Jun 18 09:37:34 2008
+1.06_01 - 2008-06-18
 	This is a test of a fix for Irix.
 
-1.06_01 - Wed Jun  4 19:18:57 2008
+1.06_01 - 2008-06-04
 	* This is a test of a fix for Irix.
 
-1.06 - Wed Apr 23 13:14:34 2008
+1.06 - 2008-04-23
 	* This release has a compiler-bug workaround for Sun C 5.9
 	identified by Andy Armstrong. No, really, it was a compiler
 	bug: http://in.opensolaris.org/jive/thread.jspa?threadID=53641&tstart=0
 	* You don't need to upgrade if you already have 1.05.
 
-1.05_02 - Sun Apr 20 15:26:21 2008
+1.05_02 - 2008-04-20
 	* This is a workaround for a Solaris compiler bug, but let's
 	see what CPAN Testers does with it.
 
-1.05_01 - Tue Nov 20 07:59:26 2007
+1.05_01 - 2007-11-20
 	* Updated rijndael.h to handle Mac OS X Panther, thanks to John Fong.
 	* No need to upgrade if you already have this installed.
 
-1.05 - Fri Nov  9 05:39:09 2007
+1.05 - 2007-11-09
 	* This version fixes the signed integer problems that Solaris had.
 	* Now this module requires perl 5.6.
 	* You don't need to upgrade if your system isn't Solaris.
 
-1.04_03 - Mon Oct 15 14:27:00 2007
+1.04_03 - 2007-10-15
 	* Quashed warnings about overflows by casting numbers to
 	unsigned ints.
 	* This compiles warning-free and passes all tests on
 	Solaris 10 with gcc 3.4.6, so it might take care of RT#27632
 
-1.04_02 - Wed Sep 19 19:24:06 2007
+1.04_02 - 2007-09-19
 	* remove test files that shouldn't be there
 
-1.04_01 - Wed Sep 12 15:34:24 2007
+1.04_01 - 2007-09-12
 	* This developer release explores the Solaris bug noted in
 	RT#27632. Some Solaris installations may be encrypting or
 	decrpyting incorrectly.
 
-1.04 - Fri Feb 23 11:20:44 2007
+1.04 - 2007-02-23
 	* Todd Ross adjusted rijndael.h to use __sun to identify Solaris boxes. GCC
 	uses __sun__ or __sun, but Solaris cc only uses __sun :
 	http://blogs.sun.com/morganh/date/20060928
 	* If you've already compiled this module, you don't need to upgrade
 
-1.03 - Thu Feb 22 15:42:04 2007
+1.03 - 2007-02-22
 	* Updated distro to include missing Pod tests
 	* No code changes
 
-1.02 - Thu Jan 25 14:48:51 2007
+1.02 - 2007-01-25
 	* Updated docs to show cipher modes. No need to upgrade if you
 	already have this.
 
-1.01 - Wed Jan 10 19:14:14 2007
+1.01 - 2007-01-10
 	* Bump to a release version. This is the same as 0.06_10.
 	* This release should fix the problems with INT types on all
 	platforms, including 64 bit platforms.
 
-0.06_10 - Wed Jan 10 00:35:10 2007
+0.06_10 - 2007-01-10
 	* Let's try the int type for MinGW:wq
 
-0.06_09 - Fri Dec 15 08:12:02 2006
+0.06_09 - 2006-12-15
 	* Updated header file to handle Solaris special case
 	* I think this might be the release candidate for 0.07! :)
 
-0.06_08 - Wed Nov 29 19:51:33 2006
+0.06_08 - 2006-11-29
 	* Adjusting WIN32 targets for typedefs. Some things look like both
 	Unix and Windows, so I don't want compilers to choke if it tries to
 	redefine types.
 
-0.06_07 - Mon Nov 27 10:37:18 2006
+0.06_07 - 2006-11-27
 	* more header file fiddling to get everyone to define the right
 	abstract types. This time check for _SYS_TYPES_H
 
-0.06_06 - Fri Nov 17 14:56:19 2006
+0.06_06 - 2006-11-17
 	* Fooled with header file some more, and tested it myself on
 	Cygwin. Instead of checking for WIN32, just check for __CYGWIN__
 
-0.06_05 - Fri Nov 17 11:13:25 2006
+0.06_05 - 2006-11-17
 	* The last two revisions seem to not define UINTxx and ends up with a
 	parse error. Let's try this, as I go off to dig out my Windows box.
 
-0.06_04 - Wed Nov 15 14:43:37 2006
+0.06_04 - 2006-11-15
 	* Try UINT patch from David Golden to get this to work on MinGW
 
-0.06_03 - Wed Nov 15 11:07:08 2006
+0.06_03 - 2006-11-15
 	* Re-jiggered logic to define UINT32 and UINT8. First I'll try
 	sys/types.h, then check if they are already defined elsewhere, and
 	lastly hardcode the typedefs based on platform. The previous
@@ -128,10 +128,10 @@ Revision history for Perl module Crypt::Rijndael
 	I guard my typedefs by checking for previous definitions. Let's
 	hope those previous definitions are right :)
 
-0.06_02 - Sun Nov 12 16:23:07 2006
+0.06_02 - 2006-11-12
 	* Let's try some hardcoded types for UINT(32|8) for Windows.
 
-0.06_01 - Sun Nov 12 10:38:56 2006
+0.06_01 - 2006-11-12
 	* Adjust version number to match distro number (RT #4227)
 	* Use <sys/types.h> instead of hard-coding (RT #22755, 9514, 18812,
 	1444, 503).
