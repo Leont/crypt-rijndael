@@ -1,3 +1,4 @@
+require 5.008;
 use strict;
 use warnings;
 
@@ -7,13 +8,22 @@ my $main_file = 'lib/Rijndael.pm';
 my %WriteMakefile = (
 	'NAME'           => "Crypt::Rijndael",
 	'VERSION_FROM'   => $main_file,
+	'ABSTRACT_FROM'  => $main_file,
 	'LICENSE'        => 'lgpl',
 	'AUTHOR'         => 'Rafael R. Sevilla (maintained by brian d foy <bdfoy@cpan.org>)',
-	'ABSTRACT_FROM'  => $main_file;
+
+	'CONFIGURE_REQUIRES' => {
+		'ExtUtils::MakeMaker' => '6.64',
+		},
+
+	'BUILD_REQUIRES' => {
+		},
+
+	'TEST_REQUIRES' => {
+		'Test::More' => '0.94',
+		},
 
 	'PREREQ_PM' => { 
-		'Test::More'         => '0',
-		'Test::Manifest'     => '1.14',
 		},
 
 	'MAN3PODS' => {
@@ -21,13 +31,17 @@ my %WriteMakefile = (
 		},
 
 	'META_MERGE' => {
-		'meta-spec' => { version => '2' },
-		'resources' => {
-			'repository' => {
+		'meta-spec' => { version => 2 },
+		resources => {
+			repository => {
 				type => 'git',
-				web  => 'https://github.com/briandfoy/crypt-rijndael',
-				url  => 'git@github.com:briandfoy/crypt-rijndael.git'
+				url  => "$github.git",
+				web  => $github,
 				},
+			bugtraker => {
+				web    => "$github/issues",
+				},
+			homepage => $github,
 			},
 		},
 
