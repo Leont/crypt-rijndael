@@ -2,11 +2,14 @@ require 5.008;
 use strict;
 use warnings;
 
-my $github    = 'https://github.com/briandfoy/';
-my $main_file = 'lib/Rijndael.pm';
+use File::Spec::Functions qw(catfile);
+
+my $module    = 'Crypt::Rijndael';
+my $github    = 'https://github.com/briandfoy/crypt-rijndael';
+my $main_file = catfile( 'lib', split /::/, "$module.pm" );
 
 my %WriteMakefile = (
-	'NAME'           => "Crypt::Rijndael",
+	'NAME'           => $module,
 	'VERSION_FROM'   => $main_file,
 	'ABSTRACT_FROM'  => $main_file,
 	'LICENSE'        => 'lgpl',
