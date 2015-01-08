@@ -1,10 +1,12 @@
 require 5.008;
+
+package Crypt::Rijndael;
 use strict;
 use warnings;
 
 use File::Spec::Functions qw(catfile);
 
-my $module    = 'Crypt::Rijndael';
+my $module    = __PACKAGE__;
 my $github    = 'https://github.com/briandfoy/crypt-rijndael';
 my $main_file = catfile( 'lib', split /::/, "$module.pm" );
 
@@ -16,7 +18,8 @@ my %WriteMakefile = (
 	'AUTHOR'         => 'Rafael R. Sevilla (maintained by brian d foy <bdfoy@cpan.org>)',
 
 	'CONFIGURE_REQUIRES' => {
-		'ExtUtils::MakeMaker' => '6.64',
+		'ExtUtils::MakeMaker'   => '6.64',
+		'File::Spec::Functions' => '0',
 		},
 
 	'BUILD_REQUIRES' => {
