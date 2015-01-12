@@ -8,7 +8,7 @@ my $module    = __PACKAGE__;
 ( my $dist = $module ) =~ s/::/-/g;
 
 my $github    = 'https://github.com/briandfoy/crypt-rijndael';
-my $main_file = catfile( 'lib', split /::/, "$module.pm" );
+my $main_file = "Rijndael.pm";
 
 my %WriteMakefile = (
 	'MIN_PERL_VERSION' => '5.008',
