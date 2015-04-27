@@ -183,7 +183,6 @@ encrypt(self, data)
 	    if (size % RIJNDAEL_BLOCKSIZE)
 	      croak ("encrypt: datasize not multiple of blocksize (%d bytes)", RIJNDAEL_BLOCKSIZE);
 
-	    RETVAL = NEWSV (0, size);
 	    SvPOK_only (RETVAL);
 	    SvCUR_set (RETVAL, size);
 	    (ix ? block_decrypt : block_encrypt)
@@ -191,6 +190,7 @@ encrypt(self, data)
           } else
             RETVAL = newSVpv ("", 0);
         }
+			RETVAL = newSV (size);
 	OUTPUT:
         RETVAL
 
