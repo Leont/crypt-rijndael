@@ -124,79 +124,80 @@ MODE_CTR(...)
 
 Crypt::Rijndael
 new(class, key, mode=MODE_ECB)
-        SV *	class
-        SV *	key
-        int	mode
-        CODE:
-        {
-          STRLEN keysize;
-          
-          if (!SvPOK (key))
-            croak("key must be an untainted string scalar");
+	SV * class
+	SV * key
+	int mode
+	CODE:
+		{
+		STRLEN keysize;
 
-          keysize = SvCUR(key);
+		if (!SvPOK (key))
+			croak("key must be an untainted string scalar");
 
-          if (keysize != 16 && keysize != 24 && keysize != 32)
-            croak ("wrong key length: key must be 128, 192 or 256 bits long");
-          if (mode != MODE_ECB && mode != MODE_CBC && mode != MODE_CFB && mode != MODE_OFB && mode != MODE_CTR)
-            croak ("illegal mode, see documentation for valid modes");
+		keysize = SvCUR(key);
 
-          Newz(0, RETVAL, 1, struct cryptstate);
-	  RETVAL->ctx.mode = RETVAL->mode = mode;
-	  /* set the IV to zero on initialization */
-	  memset(RETVAL->iv, 0, RIJNDAEL_BLOCKSIZE);
-          rijndael_setup(&RETVAL->ctx, keysize, (UINT8 *) SvPV_nolen(key));
+		if (keysize != 16 && keysize != 24 && keysize != 32)
+			croak ("wrong key length: key must be 128, 192 or 256 bits long");
+		if (mode != MODE_ECB && mode != MODE_CBC && mode != MODE_CFB && mode != MODE_OFB && mode != MODE_CTR)
+			croak ("illegal mode, see documentation for valid modes");
 
-	}
+		Newz(0, RETVAL, 1, struct cryptstate);
+		RETVAL->ctx.mode = RETVAL->mode = mode;
+		/* set the IV to zero on initialization */
+		memset(RETVAL->iv, 0, RIJNDAEL_BLOCKSIZE);
+		rijndael_setup(&RETVAL->ctx, keysize, (UINT8 *) SvPV_nolen(key));
+		}
 	OUTPUT:
-        RETVAL
+		RETVAL
 
 SV *
 set_iv(self, data)
 	Crypt::Rijndael self
-	SV *	data
+	SV * data
 
 	CODE:
-	{
-	  SV *res;
-	  STRLEN size;
-	  void *rawbytes = SvPV(data,size);
+		{
+		SV *res;
+		STRLEN size;
+		void *rawbytes = SvPV(data,size);
 
-	  if( size !=  RIJNDAEL_BLOCKSIZE )
-	  	croak( "set_iv: initial value must be the blocksize (%d bytes), but was %d bytes", RIJNDAEL_BLOCKSIZE, size );
-	  memcpy(self->iv, rawbytes, RIJNDAEL_BLOCKSIZE);
-	}
+		if( size !=  RIJNDAEL_BLOCKSIZE )
+			croak( "set_iv: initial value must be the blocksize (%d bytes), but was %d bytes", RIJNDAEL_BLOCKSIZE, size );
+		memcpy(self->iv, rawbytes, RIJNDAEL_BLOCKSIZE);
+		}
 
 SV *
 encrypt(self, data)
-        Crypt::Rijndael self
-        SV *	data
-        ALIAS:
-        	decrypt = 1
-        CODE:
-        {
-          SV *res;
-          STRLEN size;
-          void *rawbytes = SvPV(data,size);
+	Crypt::Rijndael self
+	SV * data
+	ALIAS:
+		decrypt = 1
 
-          if (size) {
-	    if (size % RIJNDAEL_BLOCKSIZE)
-	      croak ("encrypt: datasize not multiple of blocksize (%d bytes)", RIJNDAEL_BLOCKSIZE);
+	CODE:
+		{
+		SV *res;
+		STRLEN size;
+		void *rawbytes = SvPV(data,size);
 
-	    SvPOK_only (RETVAL);
-	    SvCUR_set (RETVAL, size);
-	    (ix ? block_decrypt : block_encrypt)
-	      (&self->ctx, rawbytes, size, (UINT8 *) SvPV_nolen(RETVAL), self->iv);
-          } else
-            RETVAL = newSVpv ("", 0);
-        }
+		if (size) {
+			if (size % RIJNDAEL_BLOCKSIZE)
+				croak ("encrypt: datasize not multiple of blocksize (%d bytes)", RIJNDAEL_BLOCKSIZE);
+
 			RETVAL = newSV (size);
+			SvPOK_only (RETVAL);
+			SvCUR_set (RETVAL, size);
+			(ix ? block_decrypt : block_encrypt)
+				(&self->ctx, rawbytes, size, (UINT8 *) SvPV_nolen(RETVAL), self->iv);
+			}
+		else
+			RETVAL = newSVpv ("", 0);
+		}
 	OUTPUT:
-        RETVAL
+		RETVAL
 
 
 void
 DESTROY(self)
-        Crypt::Rijndael self
-        CODE:
-        Safefree(self);
+	Crypt::Rijndael self
+	CODE:
+	Safefree(self);
