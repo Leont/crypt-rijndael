@@ -25,11 +25,6 @@
 /* try to be compatible with older perls */
 /* SvPV_nolen() macro first defined in 5.005_55 */
 /* this is slow, not threadsafe, but works */
-#include "patchlevel.h"
-#if (PATCHLEVEL == 4) || ((PATCHLEVEL == 5) && (SUBVERSION < 55))
-static STRLEN nolen_na;
-# define SvPV_nolen(sv) SvPV ((sv), nolen_na)
-#endif
 
 #include "rijndael.h"
 
@@ -43,11 +38,8 @@ MODULE = Crypt::Rijndael		PACKAGE = Crypt::Rijndael
 
 PROTOTYPES: ENABLE
 
-  # newCONSTSUB is here as of 5.004_70
-
 BOOT:
 {
-#if (PATCHLEVEL > 4) || ((PATCHLEVEL == 4) && (SUBVERSION >= 70))
   HV *stash = gv_stashpv("Crypt::Rijndael", 0);
 
   newCONSTSUB (stash, "keysize",    newSViv (32)        );
@@ -58,69 +50,7 @@ BOOT:
   newCONSTSUB (stash, "MODE_PCBC",  newSViv (MODE_PCBC) );
   newCONSTSUB (stash, "MODE_OFB",   newSViv (MODE_OFB)  );
   newCONSTSUB (stash, "MODE_CTR",   newSViv (MODE_CTR)  );
-#endif
 }
-
-#if (PATCHLEVEL < 4) || ((PATCHLEVEL == 4) && (SUBVERSION < 70))
-
-int
-keysize(...)
-  CODE:
-     RETVAL=32;
-  OUTPUT:
-     RETVAL
-
-int
-blocksize(...)
-  CODE:
-     RETVAL=16;
-  OUTPUT:
-     RETVAL
-
-int
-MODE_ECB(...)
-  CODE:
-     RETVAL=MODE_ECB;
-  OUTPUT:
-     RETVAL
-
-int
-MODE_CBC(...)
-  CODE:
-     RETVAL=MODE_CBC;
-  OUTPUT:
-     RETVAL
-
-int
-MODE_CFB(...)
-  CODE:
-     RETVAL=MODE_CFB;
-  OUTPUT:
-     RETVAL
-
-int
-MODE_PCBC(...)
-  CODE:
-     RETVAL=MODE_PCBC;
-  OUTPUT:
-     RETVAL
-
-int
-MODE_OFB(...)
-  CODE:
-     RETVAL=MODE_OFB;
-  OUTPUT:
-     RETVAL
-
-int
-MODE_CTR(...)
-  CODE:
-     RETVAL=MODE_CTR;
-  OUTPUT:
-     RETVAL
-
-#endif
-
 
 Crypt::Rijndael
 new(class, key, mode=MODE_ECB)
