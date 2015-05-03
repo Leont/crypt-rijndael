@@ -18,13 +18,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#define PERL_NO_GET_CONTEXT
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
-
-/* try to be compatible with older perls */
-/* SvPV_nolen() macro first defined in 5.005_55 */
-/* this is slow, not threadsafe, but works */
 
 #include "rijndael.h"
 
@@ -36,20 +33,20 @@ typedef struct cryptstate {
 
 MODULE = Crypt::Rijndael		PACKAGE = Crypt::Rijndael
 
-PROTOTYPES: ENABLE
+PROTOTYPES: DISABLE
 
 BOOT:
 {
-  HV *stash = gv_stashpv("Crypt::Rijndael", 0);
+  HV *stash = gv_stashpvs("Crypt::Rijndael", GV_ADD);
 
-  newCONSTSUB (stash, "keysize",    newSViv (32)        );
-  newCONSTSUB (stash, "blocksize",  newSViv (16)        );
-  newCONSTSUB (stash, "MODE_ECB",   newSViv (MODE_ECB)  );
-  newCONSTSUB (stash, "MODE_CBC",   newSViv (MODE_CBC)  );
-  newCONSTSUB (stash, "MODE_CFB",   newSViv (MODE_CFB)  );
-  newCONSTSUB (stash, "MODE_PCBC",  newSViv (MODE_PCBC) );
-  newCONSTSUB (stash, "MODE_OFB",   newSViv (MODE_OFB)  );
-  newCONSTSUB (stash, "MODE_CTR",   newSViv (MODE_CTR)  );
+  newCONSTSUB(stash, "keysize",   newSVuv(32)        );
+  newCONSTSUB(stash, "blocksize", newSVuv(16)        );
+  newCONSTSUB(stash, "MODE_ECB",  newSVuv(MODE_ECB)  );
+  newCONSTSUB(stash, "MODE_CBC",  newSVuv(MODE_CBC)  );
+  newCONSTSUB(stash, "MODE_CFB",  newSVuv(MODE_CFB)  );
+  newCONSTSUB(stash, "MODE_PCBC", newSVuv(MODE_PCBC) );
+  newCONSTSUB(stash, "MODE_OFB",  newSVuv(MODE_OFB)  );
+  newCONSTSUB(stash, "MODE_CTR",  newSVuv(MODE_CTR)  );
 }
 
 Crypt::Rijndael
@@ -74,7 +71,7 @@ new(class, key, mode=MODE_ECB)
 		Newz(0, RETVAL, 1, struct cryptstate);
 		RETVAL->ctx.mode = RETVAL->mode = mode;
 		/* set the IV to zero on initialization */
-		memset(RETVAL->iv, 0, RIJNDAEL_BLOCKSIZE);
+		Zero(RETVAL->iv, RIJNDAEL_BLOCKSIZE, char);
 		rijndael_setup(&RETVAL->ctx, keysize, (UINT8 *) SvPV_nolen(key));
 		}
 	OUTPUT:
@@ -92,8 +89,8 @@ set_iv(self, data)
 		void *rawbytes = SvPV(data,size);
 
 		if( size !=  RIJNDAEL_BLOCKSIZE )
-			croak( "set_iv: initial value must be the blocksize (%d bytes), but was %d bytes", RIJNDAEL_BLOCKSIZE, size );
-		memcpy(self->iv, rawbytes, RIJNDAEL_BLOCKSIZE);
+			Perl_croak(aTHX_ "set_iv: initial value must be the blocksize (%d bytes), but was %d bytes", RIJNDAEL_BLOCKSIZE, size);
+		Copy(rawbytes, self->iv, RIJNDAEL_BLOCKSIZE, char);
 		}
 
 SV *
