@@ -19,9 +19,13 @@
  */
 
 #define PERL_NO_GET_CONTEXT
+#define NEED_newCONSTSUB
+#define NEED_sv_2pv_flags
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
+
+#include "ppport.h"
 
 #include "rijndael.h"
 
