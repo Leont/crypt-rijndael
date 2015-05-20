@@ -111,15 +111,19 @@ encrypt(self, data)
 		void *rawbytes = SvPV(data,size);
 
 		if (size) {
+			UINT8* buffer;
+
 			if (size % RIJNDAEL_BLOCKSIZE)
 				croak ("encrypt: datasize not multiple of blocksize (%d bytes)", RIJNDAEL_BLOCKSIZE);
 
-			RETVAL = newSV (size);
-			SvPOK_only (RETVAL);
-			SvCUR_set (RETVAL, size);
+			RETVAL = newSV(size);
+			SvPOK_only(RETVAL);
+			SvCUR_set(RETVAL, size);
+			buffer = (UINT8 *)SvPV_nolen(RETVAL);
 			(ix ? block_decrypt : block_encrypt)
-				(&self->ctx, rawbytes, size, (UINT8 *) SvPV_nolen(RETVAL), self->iv);
-			}
+				(&self->ctx, rawbytes, size, buffer, self->iv);
+			buffer[size] = '\0';
+		}
 		else
 			RETVAL = newSVpv ("", 0);
 		}
