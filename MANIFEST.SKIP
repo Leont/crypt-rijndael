@@ -68,5 +68,9 @@ t/trailing_nulls.t
 ref/.*
 rijndael-vals
 
+README.pod
+xt/
+\.swp$
+
 .*\.o$
 .*\.bs$
