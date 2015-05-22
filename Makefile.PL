@@ -1,123 +1,74 @@
-package Crypt::Rijndael;
 use strict;
 use warnings;
 
-=encoding utf8
+use 5.006;
 
-=head1 The build file for Crypt::Rijndael
+use ExtUtils::MakeMaker;
+my $github = 'https://github.com/leont/crypt-rijndael';
 
-This build file is a modulino; it works as both a build script and
-a module.
+my %WriteMakefileArgs = (
+  ABSTRACT_FROM => 'Rijndael.pm',
+  AUTHOR => [
+    'Rafael R. Sevilla',
+    'brian d foy <bdfoy@cpan.org>',
+    'Leon Timmermans <leont@cpan.org>'
+  ],
+  CONFIGURE_REQUIRES => {
+    'ExtUtils::MakeMaker' => 0,
+  },
+  DISTNAME => 'Crypt-Rijndael',
+  EXE_FILES => [],
+  LICENSE => 'lgpl',
+  NAME => 'Crypt::Rijndael',
+  PREREQ_PM => {
+  },
+  TEST_REQUIRES => {
+    'Test::More' => 0,
+  },
+  test => {
+    'TESTS' => 't/*.t t/*/*.t'
+  },
+  OBJECT => q[_rijndael$(OBJ_EXT) Rijndael$(OBJ_EXT)],
+  'META_MERGE' => {
+    dynamic_config => 0,
+    'meta-spec' => { version => 2 },
+    resources => {
+      repository => {
+        type => 'git',
+        url  => "$github.git",
+        web  => $github,
+      },
+      bugtracker => {
+        web  => "$github/issues",
+      },
+      homepage => $github,
+    },
+  },
+  MIN_PERL_VERSION => '5.006',
+  VERSION_FROM => 'Rijndael.pm',
+  clean => { FILES => 'Crypt-Rijndael-*' },
+  dist => {
+    PREOP    => 'pod2text Rijndael.pm | tee README >$(DISTVNAME)/README; chmod -R u=rwX,go=rX . ;',
+    COMPRESS => 'gzip -9v',
+    SUFFIX   => '.gz',
+  },
+);
 
-To build the distribution, run this file normally:
+my %FallbackPrereqs = (
+    'ExtUtils::MakeMaker' => 0,
+    'Test::More' => '0.94',
+);
 
-	% perl Makefile.PL
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  delete $WriteMakefileArgs{TEST_REQUIRES};
+  delete $WriteMakefileArgs{BUILD_REQUIRES};
+  $WriteMakefileArgs{PREREQ_PM} = \%FallbackPrereqs;
+}
 
-But, it's more interesting than that. You can load it with C<require>
-and call C<arguments> to get the data structure it passes to
-C<WriteMakefile>:
+delete $WriteMakefileArgs{AUTHOR} unless eval { ExtUtils::MakeMaker->VERSION(6.57_01) };
+delete $WriteMakefileArgs{MIN_PERL_VERSION} unless eval { ExtUtils::MakeMaker->VERSION(6.47_01) };
 
-	my $package = require '/path/to/Makefile.PL';
-	my $arguments = $package->arguments;
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES} unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
 
-Note that C<require>-ing a file makes an entry in C<%INC> for exactly
-that name. If you try to C<require> another file with the same name,
-even from a different path, C<require> thinks it has already loaded
-the file. As such, I recommend you always require the full path to the
-file.
+WriteMakefile(%WriteMakefileArgs);
 
-The return value of the C<require> is a package name (in this case,
-the name of the main module. Use that to call the C<arguments> method.
-
-Even if this distribution needs a higher version of Perl, this bit
-only needs v5.8. You can play with the data structure with a primitive
-Perl.
-
-=cut
-
-use File::Spec::Functions qw(catfile);
-
-my $module    = __PACKAGE__;
-( my $dist = $module ) =~ s/::/-/g;
-
-my $github    = 'https://github.com/briandfoy/crypt-rijndael';
-my $main_file = "Rijndael.pm";
-
-my %WriteMakefile = (
-	'MIN_PERL_VERSION' => '5.008',
-
-	'NAME'           => $module,
-	'VERSION_FROM'   => $main_file,
-	'ABSTRACT_FROM'  => $main_file,
-	'LICENSE'        => 'lgpl',
-	'AUTHOR'         => 'Rafael R. Sevilla (maintained by brian d foy <bdfoy@cpan.org>)',
-
-	'CONFIGURE_REQUIRES' => {
-		'ExtUtils::MakeMaker'   => '6.64',
-		'File::Spec::Functions' => '0',
-		},
-
-	'BUILD_REQUIRES' => {
-		},
-
-	'TEST_REQUIRES' => {
-		'Test::More' => '0.94',
-		},
-
-	'PREREQ_PM' => {
-		},
-
-	'MAN3PODS' => {
-		'Rijndael.pm' => '$(INST_MAN3DIR)/Crypt::Rijndael.3',
-		},
-
-	'META_MERGE' => {
-		'meta-spec' => { version => 2 },
-		resources => {
-			repository => {
-				type => 'git',
-				url  => "$github.git",
-				web  => $github,
-				},
-			bugtracker => {
-				web    => "$github/issues",
-				},
-			homepage => $github,
-			},
-		},
-
-	clean => { FILES => "$dist-*" },
-
-	dist => {
-		PREOP     => 'pod2text Rijndael.pm | tee README >$(DISTVNAME)/README; chmod -R u=rwX,go=rX . ;',
-		COMPRESS  => 'gzip -9v',
-		SUFFIX    => '.gz',
-		},
-
-	OBJECT => q[_rijndael$(OBJ_EXT) Rijndael$(OBJ_EXT)],
-	);
-
-sub arguments { \%WriteMakefile }
-
-do_it() unless caller;
-sub do_it {
-	require File::Spec;
-	my $MM ='ExtUtils::MakeMaker';
-	my $MM_version =
-		eval{ "$MM " . $WriteMakefile{'CONFIGURE_REQUIRES'}{'ExtUtils::MakeMaker'} }
-			||
-		"$MM 6.64";
-	eval "use $MM_version; 1" or die "Could not load $MM_version: $@";
-	eval "use Test::Manifest 1.21"
-		if -e File::Spec->catfile( qw(t test_manifest) );
-
-	my $arguments = arguments();
-	my $minimum_perl = $arguments->{MIN_PERL_VERSION} || '5.008';
-	eval "require $minimum_perl;" or die $@;
-
-	WriteMakefile( %$arguments );
-	}
-
-
-no warnings;
-__PACKAGE__;
