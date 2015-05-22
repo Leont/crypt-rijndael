@@ -63,14 +63,14 @@ new(class, key, mode=MODE_ECB)
 		STRLEN keysize;
 
 		if (!SvPOK (key))
-			croak("key must be an untainted string scalar");
+			Perl_croak(aTHX_ "key must be an untainted string scalar");
 
 		keysize = SvCUR(key);
 
 		if (keysize != 16 && keysize != 24 && keysize != 32)
-			croak ("wrong key length: key must be 128, 192 or 256 bits long");
+			Perl_croak(aTHX_ "wrong key length: key must be 128, 192 or 256 bits long");
 		if (mode != MODE_ECB && mode != MODE_CBC && mode != MODE_CFB && mode != MODE_OFB && mode != MODE_CTR)
-			croak ("illegal mode, see documentation for valid modes");
+			Perl_croak(aTHX_ "illegal mode, see documentation for valid modes");
 
 		Newz(0, RETVAL, 1, struct cryptstate);
 		RETVAL->ctx.mode = RETVAL->mode = mode;
@@ -114,7 +114,7 @@ encrypt(self, data)
 			UINT8* buffer;
 
 			if (size % RIJNDAEL_BLOCKSIZE)
-				croak ("encrypt: datasize not multiple of blocksize (%d bytes)", RIJNDAEL_BLOCKSIZE);
+				Perl_croak(aTHX_ "encrypt: datasize not multiple of blocksize (%d bytes)", RIJNDAEL_BLOCKSIZE);
 
 			RETVAL = newSV(size);
 			SvPOK_only(RETVAL);
