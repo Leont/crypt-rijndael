@@ -17,6 +17,10 @@ __END__
 
 Crypt::Rijndael - Crypt::CBC compliant Rijndael encryption module
 
+=head1 VERSION
+
+Version 1.12
+
 =head1 SYNOPSIS
 
  use Crypt::Rijndael;
