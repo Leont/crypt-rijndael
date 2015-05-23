@@ -1,6 +1,6 @@
 Revision history for Perl module Crypt::Rijndael
 
-1.13
+1.13 - 2015-05-23
     * Correctly null-terminate encoded/decoded strings (RT 769/#5)
 
 1.12 - 2014-01-03
