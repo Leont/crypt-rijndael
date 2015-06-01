@@ -64,53 +64,13 @@ typedef struct {
  * specifying 7 will use only the first 6 bytes of the key given.  DO NOT
  * PASS A VALUE LESS THAN 16 TO KEYSIZE! 
  */
-void
-rijndael_setup(RIJNDAEL_context *ctx, size_t keysize, const uint8_t *key);
-
-/*
- * rijndael_encrypt()
- *
- * Encrypt 16 bytes of data with the Rijndael algorithm.  Before this
- * function can be used, rijndael_setup must be used in order to initialize
- * Rijndael's key schedule.
- *
- * This function always encrypts 16 bytes of plaintext to 16 bytes of
- * ciphertext.  The memory areas of the plaintext and the ciphertext can
- * overlap.
- */
-
-void
-rijndael_encrypt(RIJNDAEL_context *context,
-		 const uint8_t *plaintext,
-		 uint8_t *ciphertext);
-
-/*
- * rijndael_decrypt()
- *
- * Decrypt 16 bytes of data with the Rijndael algorithm.
- *
- * Before this function can be used, rijndael_setup() must be used in order
- * to set up the key schedule required for the decryption algorithm.
- * 
- * This function always decrypts 16 bytes of ciphertext to 16 bytes of
- * plaintext.  The memory areas of the plaintext and the ciphertext can
- * overlap.
- */
-
-void
-rijndael_decrypt(RIJNDAEL_context *context,
-		 const uint8_t *ciphertext,
-		 uint8_t *plaintext);
+void rijndael_setup(RIJNDAEL_context *ctx, size_t keysize, const uint8_t *key);
 
 /* Encrypt a block of plaintext in a mode specified in the context */
-void
-block_encrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen,
-	      uint8_t *output, uint8_t *iv);
+void block_encrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int inputlen, uint8_t *output, const uint8_t *iv);
 
 /* Decrypt a block of plaintext in a mode specified in the context */
-void
-block_decrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen,
-	      uint8_t *output, uint8_t *iv);
+void block_decrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int inputlen, uint8_t *output, const uint8_t *iv);
 
 
 #endif /* RIJNDAEL_H */
