@@ -470,145 +470,155 @@ rijndael_decrypt(RIJNDAEL_context *ctx,
   key_addition32to8(t, &(ctx->ikeys[0]), plaintext);
 }
 
-void
-block_encrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen,
-		   uint8_t *output, uint8_t *iv)
+static void ecb_encrypt(RIJNDAEL_context *ctx, uint8_t*input, int inputlen, uint8_t *output) {
+  int i, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+  for (i = 0; i<nblocks; i++) {
+    rijndael_encrypt(ctx, input + i*RIJNDAEL_BLOCKSIZE, output + i*RIJNDAEL_BLOCKSIZE);
+  }
+}
+
+static void cbc_encrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output, uint8_t *iv) {
+  uint8_t block[RIJNDAEL_BLOCKSIZE];
+  int i, j, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+
+  //* set initial value
+  memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
+  for (i=0; i< nblocks; i++) {
+    for (j=0; j<RIJNDAEL_BLOCKSIZE; j++)
+      block[j] ^= input[i*RIJNDAEL_BLOCKSIZE + j];
+    rijndael_encrypt(ctx, block, block);
+    memcpy(output + i*RIJNDAEL_BLOCKSIZE, block, RIJNDAEL_BLOCKSIZE);
+  }
+}
+
+static void cfb_encrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output, uint8_t *iv) {
+  uint8_t block[RIJNDAEL_BLOCKSIZE];
+  int i, j, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+
+  memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
+  for (i=0; i<nblocks; i++) {
+    rijndael_encrypt(ctx, block, block);
+    for (j=0; j<RIJNDAEL_BLOCKSIZE; j++)
+      block[j] ^= input[i*RIJNDAEL_BLOCKSIZE + j];
+    memcpy(output + i*RIJNDAEL_BLOCKSIZE, block, RIJNDAEL_BLOCKSIZE);
+  }
+}
+
+static void ofb_encrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output, uint8_t *iv) {
+  uint8_t block[RIJNDAEL_BLOCKSIZE];
+  int i, j, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+
+  memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
+  for (i=0; i<nblocks; i++) {
+    rijndael_encrypt(ctx, block, block);
+    for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
+      output[i*RIJNDAEL_BLOCKSIZE + j] = block[j] ^ input[i*RIJNDAEL_BLOCKSIZE + j];
+    }
+  }
+}
+
+static void ctr_encrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output, uint8_t *iv) {
+  uint8_t block[RIJNDAEL_BLOCKSIZE], block2[RIJNDAEL_BLOCKSIZE];
+  int i, j, carry_flg, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+
+  memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
+  for (i=0; i<nblocks; i++) {
+    rijndael_encrypt(ctx, block, block2);
+    for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
+      output[i*RIJNDAEL_BLOCKSIZE + j] = block2[j] ^ input[i*RIJNDAEL_BLOCKSIZE + j];
+    }
+    block[RIJNDAEL_BLOCKSIZE-1]++;
+    carry_flg = block[RIJNDAEL_BLOCKSIZE-1] != 0 ? 0 : 1;
+    for (j=RIJNDAEL_BLOCKSIZE-2; j>=0; j--) {
+      if (carry_flg) {
+        block[j]++;
+        carry_flg = block[j] != 0 ? 0 : 1;
+      } else
+        break;
+    }
+  }
+}
+
+void block_encrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output, uint8_t *iv)
 {
-  int i, j, nblocks, carry_flg;
-  uint8_t block[RIJNDAEL_BLOCKSIZE], block2[RIJNDAEL_BLOCKSIZE], oldptxt;
-
-  nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
-
   switch (ctx->mode) {
   case MODE_ECB:		/* electronic code book */
-    for (i = 0; i<nblocks; i++) {
-      rijndael_encrypt(ctx, &input[RIJNDAEL_BLOCKSIZE*i],
-		       &output[RIJNDAEL_BLOCKSIZE*i]);
-    }
+    ecb_encrypt(ctx, input, inputlen, output);
     break;
   case MODE_CBC:		/* Cipher block chaining */
     /* set initial value */
-    memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
-    for (i=0; i< nblocks; i++) {
-      for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) 
-	block[j] ^= input[i*RIJNDAEL_BLOCKSIZE + j] & 0xff;
-      rijndael_encrypt(ctx, block, block);
-      memcpy(&output[RIJNDAEL_BLOCKSIZE*i], block, RIJNDAEL_BLOCKSIZE);
-    }
+    cbc_encrypt(ctx, input, inputlen, output, iv);
     break;
   case MODE_CFB:		/* 128-bit cipher feedback */
-    memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
-    for (i=0; i<nblocks; i++) {
-      rijndael_encrypt(ctx, block, block);
-      for (j=0; j<RIJNDAEL_BLOCKSIZE; j++)
-	block[j] ^= input[i*RIJNDAEL_BLOCKSIZE + j];
-      memcpy(&output[RIJNDAEL_BLOCKSIZE*i], block, RIJNDAEL_BLOCKSIZE);
-    }
+    cfb_encrypt(ctx, input, inputlen, output, iv);
     break;
   case MODE_OFB:		/* 128-bit output feedback */
-    memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
-    for (i=0; i<nblocks; i++) {
-      rijndael_encrypt(ctx, block, block);
-      for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
-	output[RIJNDAEL_BLOCKSIZE*i + j] = block[j] ^
-	  input[RIJNDAEL_BLOCKSIZE*i + j];
-      }
-    }
+    ofb_encrypt(ctx, input, inputlen, output, iv);
     break;
   case MODE_CTR:		/* counter */
-    memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
-    for (i=0; i<nblocks; i++) {
-      rijndael_encrypt(ctx, block, block2);
-      for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
-	output[RIJNDAEL_BLOCKSIZE*i + j] = block2[j] ^
-	  input[RIJNDAEL_BLOCKSIZE*i + j];
-      }
-      block[RIJNDAEL_BLOCKSIZE-1]++;
-      carry_flg = block[RIJNDAEL_BLOCKSIZE-1] != 0 ? 0 : 1;
-      for (j=RIJNDAEL_BLOCKSIZE-2; j>=0; j--) {
-	if (carry_flg) {
-	  block[j]++;
-          carry_flg = block[j] != 0 ? 0 : 1;
-        } else
-	  break;
-      }
-    }
+    ctr_encrypt(ctx, input, inputlen, output, iv);
     break;
   default:
     break;
   }
 }
 
-void
-block_decrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen,
-		   uint8_t *output, uint8_t *iv)
-{
-  int i, j, nblocks, carry_flg;
-  uint8_t block[RIJNDAEL_BLOCKSIZE], block2[RIJNDAEL_BLOCKSIZE];
+static void ecb_decrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output) {
+  int i, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+  for (i = 0; i<nblocks; i++) {
+    rijndael_decrypt(ctx, input + i*RIJNDAEL_BLOCKSIZE, output + i*RIJNDAEL_BLOCKSIZE);
+  }
+}
 
-  nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+static void cbc_decrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output, uint8_t *iv) {
+  uint8_t block[RIJNDAEL_BLOCKSIZE];
+  int i, j, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+
+  /* first block */
+  rijndael_decrypt(ctx, input, block);
+  /* XOR the block with the IV to get the output */
+  for (i=0; i<RIJNDAEL_BLOCKSIZE; i++)
+    output[i] = block[i] ^ iv[i];
+  for (i=1; i<nblocks; i++) {
+    rijndael_decrypt(ctx, &input[i*RIJNDAEL_BLOCKSIZE], block);
+    for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
+      output[i*RIJNDAEL_BLOCKSIZE + j] = block[j] ^ input[(i-1)*RIJNDAEL_BLOCKSIZE + j];
+    }
+  }
+}
+
+static void cfb_decrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output, uint8_t *iv) {
+  uint8_t block[RIJNDAEL_BLOCKSIZE];
+  int i, j, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+
+  memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
+  for (i=0; i<nblocks; i++) {
+    rijndael_encrypt(ctx, block, block); /* ENCRYPT is right! */
+    for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
+      output[i*RIJNDAEL_BLOCKSIZE + j] = block[j] ^ input[i*RIJNDAEL_BLOCKSIZE + j];
+    }
+    memcpy(block, input + i*RIJNDAEL_BLOCKSIZE, RIJNDAEL_BLOCKSIZE);
+  }
+}
+
+void
+block_decrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen, uint8_t *output, uint8_t *iv)
+{
   switch (ctx->mode) {
   case MODE_ECB:
-    for (i = 0; i<nblocks; i++) {
-      rijndael_decrypt(ctx, &input[RIJNDAEL_BLOCKSIZE*i],
-		       &output[RIJNDAEL_BLOCKSIZE*i]);
-    }
+    ecb_decrypt(ctx, input, inputlen, output);
     break;
   case MODE_CBC:
-    /* first block */
-    rijndael_decrypt(ctx, input, block);
-    /* XOR the block with the IV to get the output */
-    for (i=0; i<RIJNDAEL_BLOCKSIZE; i++)
-      output[i] = block[i] ^ iv[i];
-    for (i=1; i<nblocks; i++) {
-      rijndael_decrypt(ctx, &input[i*RIJNDAEL_BLOCKSIZE], block);
-      for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
-	output[i*RIJNDAEL_BLOCKSIZE + j] = block[j] ^
-	  input[(i-1)*RIJNDAEL_BLOCKSIZE + j];
-      }
-    }
+    cbc_decrypt(ctx, input, inputlen, output, iv);
     break;
   case MODE_CFB:		/* 128-bit cipher feedback */
-    memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
-    for (i=0; i<nblocks; i++) {
-      rijndael_encrypt(ctx, block, block); /* ENCRYPT is right! */
-      for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
-	output[RIJNDAEL_BLOCKSIZE*i + j] = block[j] ^
-	  input[RIJNDAEL_BLOCKSIZE*i + j];
-      }
-      memcpy(block, &input[RIJNDAEL_BLOCKSIZE*i], RIJNDAEL_BLOCKSIZE);
-    }
+    cfb_decrypt(ctx, input, inputlen, output, iv);
     break;
   case MODE_OFB:		/* 128-bit output feedback */
-    /* this is exactly the same as encryption in OFB...in fact you can use
-       the encryption in OFB mode to decrypt! */
-    memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
-    for (i=0; i<nblocks; i++) {
-      rijndael_encrypt(ctx, block, block);
-      for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
-	output[RIJNDAEL_BLOCKSIZE*i + j] = block[j] ^
-	  input[RIJNDAEL_BLOCKSIZE*i + j];
-      }
-    }
+    ofb_encrypt(ctx, input, inputlen, output, iv);
     break;
   case MODE_CTR:		/* counter */
-    memcpy(block, iv, RIJNDAEL_BLOCKSIZE);
-    for (i=0; i<nblocks; i++) {
-      rijndael_encrypt(ctx, block, block2);
-      for (j=0; j<RIJNDAEL_BLOCKSIZE; j++) {
-	output[RIJNDAEL_BLOCKSIZE*i + j] = block2[j] ^
-	  input[RIJNDAEL_BLOCKSIZE*i + j];
-      }
-      block[RIJNDAEL_BLOCKSIZE-1]++;
-      carry_flg = block[RIJNDAEL_BLOCKSIZE-1] != 0 ? 0 : 1;
-      for (j=RIJNDAEL_BLOCKSIZE-2; j>=0; j--) {
-	if (carry_flg) {
-	  block[j]++;
-          carry_flg = block[j] != 0 ? 0 : 1;
-        } else
-	  break;
-      }
-    }
+    ctr_encrypt(ctx, input, inputlen, output, iv);
     break;
   default:
     break;
