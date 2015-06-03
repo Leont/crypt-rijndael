@@ -32,7 +32,6 @@
 typedef struct cryptstate {
   RIJNDAEL_context ctx;
   uint8_t iv[RIJNDAEL_BLOCKSIZE];
-  int mode;
 } *Crypt__Rijndael;
 
 MODULE = Crypt::Rijndael		PACKAGE = Crypt::Rijndael
@@ -73,7 +72,7 @@ new(class, key, mode=MODE_ECB)
 			Perl_croak(aTHX_ "illegal mode, see documentation for valid modes");
 
 		Newz(0, RETVAL, 1, struct cryptstate);
-		RETVAL->ctx.mode = RETVAL->mode = mode;
+		RETVAL->ctx.mode = mode;
 		/* set the IV to zero on initialization */
 		Zero(RETVAL->iv, RIJNDAEL_BLOCKSIZE, char);
 		rijndael_setup(&RETVAL->ctx, keysize, (uint8_t *) SvPV_nolen(key));
