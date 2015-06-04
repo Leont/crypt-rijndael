@@ -112,7 +112,7 @@ encrypt(self, data)
 		if (size) {
 			uint8_t* buffer;
 
-			if (size % RIJNDAEL_BLOCKSIZE)
+			if ((self->ctx.mode == MODE_ECB || self->ctx.mode == MODE_CBC) && size % RIJNDAEL_BLOCKSIZE)
 				Perl_croak(aTHX_ "encrypt: datasize not multiple of blocksize (%d bytes)", RIJNDAEL_BLOCKSIZE);
 
 			RETVAL = newSV(size);

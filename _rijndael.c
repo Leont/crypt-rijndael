@@ -485,6 +485,13 @@ static void xor_block_to(const uint8_t* block, const uint8_t* input, uint8_t* ou
     output[j] = block[j] ^ input[j];
 }
 
+static void xor_bytes_to(const uint8_t* block, const uint8_t* input, size_t inputlen, uint8_t* output) {
+  int j;
+  for (j=0; j<inputlen; j++)
+    output[j] = block[j] ^ input[j];
+}
+
+#define xor_bytes_with(input, output, length) xor_bytes_to(input, output, length, output)
 #define block_no(ptr, index) ((ptr) + (index)*RIJNDAEL_BLOCKSIZE)
 #define copy_block(from, to) memcpy(to, from, RIJNDAEL_BLOCKSIZE)
 
@@ -510,7 +517,7 @@ static void cbc_encrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int i
 
 static void cfb_encrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int inputlen, uint8_t *output, const uint8_t *iv) {
   uint8_t block[RIJNDAEL_BLOCKSIZE];
-  int i, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+  int i, nblocks = inputlen / RIJNDAEL_BLOCKSIZE, leftover = inputlen % RIJNDAEL_BLOCKSIZE;
 
   copy_block(iv, block);
   for (i=0; i<nblocks; i++) {
@@ -518,16 +525,25 @@ static void cfb_encrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int i
     xor_block_with(block_no(input, i), block);
     copy_block(block, block_no(output, i));
   }
+  if (leftover) {
+    rijndael_encrypt(ctx, block, block);
+    xor_bytes_with(block_no(input, nblocks), block, leftover);
+    memcpy(block_no(output, nblocks), block, leftover);
+  }
 }
 
 static void ofb_encrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int inputlen, uint8_t *output, const uint8_t *iv) {
   uint8_t block[RIJNDAEL_BLOCKSIZE];
-  int i, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+  int i, nblocks = inputlen / RIJNDAEL_BLOCKSIZE, leftover = inputlen % RIJNDAEL_BLOCKSIZE;
 
   copy_block(iv, block);
   for (i=0; i<nblocks; i++) {
     rijndael_encrypt(ctx, block, block);
     xor_block_to(block_no(input, i), block, block_no(output, i));
+  }
+  if (leftover) {
+    rijndael_encrypt(ctx, block, block);
+    xor_bytes_to(block_no(input, nblocks), block, leftover, block_no(output, nblocks));
   }
 }
 
@@ -540,13 +556,18 @@ static void increment_counter(uint8_t* counter) {
 
 static void ctr_encrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int inputlen, uint8_t *output, const uint8_t *iv) {
   uint8_t block[RIJNDAEL_BLOCKSIZE], counter[RIJNDAEL_BLOCKSIZE];
-  int i, carry_flg, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+  int i, carry_flg, nblocks = inputlen / RIJNDAEL_BLOCKSIZE, leftover = inputlen % RIJNDAEL_BLOCKSIZE;
 
   copy_block(iv, counter);
   for (i=0; i<nblocks; i++) {
     rijndael_encrypt(ctx, counter, block);
     xor_block_to(block, block_no(input, i), block_no(output, i));
     increment_counter(counter);
+  }
+  if (leftover) {
+    rijndael_encrypt(ctx, counter, block);
+    xor_bytes_to(block, block_no(input, nblocks), leftover, block_no(output, nblocks));
+/*  increment_counter(counter); */
   }
 }
 
@@ -596,13 +617,18 @@ static void cbc_decrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int i
 
 static void cfb_decrypt(const RIJNDAEL_context *ctx, const uint8_t *input, int inputlen, uint8_t *output, const uint8_t *iv) {
   uint8_t block[RIJNDAEL_BLOCKSIZE];
-  int i, nblocks = inputlen / RIJNDAEL_BLOCKSIZE;
+  int i, nblocks = inputlen / RIJNDAEL_BLOCKSIZE, leftover = inputlen % RIJNDAEL_BLOCKSIZE;
 
   copy_block(iv, block);
   for (i=0; i<nblocks; i++) {
     rijndael_encrypt(ctx, block, block); /* ENCRYPT is right! */
     xor_block_to(block, block_no(input, i), block_no(output, i));
     copy_block(block_no(input, i), block);
+  }
+  if (leftover) {
+    rijndael_encrypt(ctx, block, block); /* ENCRYPT is right! */
+    xor_bytes_to(block, block_no(input, i), leftover, block_no(output, i));
+    memcpy(block, block_no(input, i), leftover);
   }
 }
 
