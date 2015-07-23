@@ -58,9 +58,10 @@ sub crypt_decrypt {
 	my $key    = make_string(32);
 	my $c      = Crypt::Rijndael->new($key, $mode);
 	my $data   = make_string(32 * int rand(16) + 1);
+	my $iv     = make_string(16);
 
-	my $cipher = $c->encrypt($data);
-	my $plain  = $c->decrypt($cipher);
+	my $cipher = $c->encrypt($data, $iv);
+	my $plain  = $c->decrypt($cipher, $iv);
 
 	return {
 		data   => $data,
@@ -75,9 +76,10 @@ sub crypt_decrypt_partial {
 	my $key    = make_string(16);
 	my $c      = Crypt::Rijndael->new($key, $mode);
 	my $data   = make_string(32 * int(2 + 1) + 8);
+	my $iv     = make_string(16);
 
-	my $cipher = $c->encrypt($data);
-	my $plain  = $c->decrypt($cipher);
+	my $cipher = $c->encrypt($data, $iv);
+	my $plain  = $c->decrypt($cipher, $iv);
 
 	return ($plain, $data);
 }

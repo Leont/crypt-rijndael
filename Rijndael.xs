@@ -91,9 +91,10 @@ set_iv(self, data)
 
 
 SV *
-encrypt(self, data)
+encrypt(self, data, iv = self->iv)
 	Crypt::Rijndael self
 	SV * data
+	IVEC iv
 	ALIAS:
 		decrypt = 1
 
@@ -114,7 +115,7 @@ encrypt(self, data)
 			SvCUR_set(RETVAL, size);
 			buffer = (uint8_t *)SvPV_nolen(RETVAL);
 			(ix ? block_decrypt : block_encrypt)
-				(&self->ctx, rawbytes, size, buffer, self->iv);
+				(&self->ctx, rawbytes, size, buffer, iv);
 			buffer[size] = '\0';
 		}
 		else
