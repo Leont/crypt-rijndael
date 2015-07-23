@@ -34,6 +34,8 @@ typedef struct cryptstate {
   uint8_t iv[RIJNDAEL_BLOCKSIZE];
 } *Crypt__Rijndael;
 
+typedef const char* IVEC;
+
 MODULE = Crypt::Rijndael		PACKAGE = Crypt::Rijndael
 
 PROTOTYPES: DISABLE
@@ -83,18 +85,10 @@ new(class, key, mode=MODE_ECB)
 SV *
 set_iv(self, data)
 	Crypt::Rijndael self
-	SV * data
-
+	IVEC data
 	CODE:
-		{
-		SV *res;
-		STRLEN size;
-		void *rawbytes = SvPV(data,size);
+		Copy(data, self->iv, RIJNDAEL_BLOCKSIZE, char);
 
-		if( size !=  RIJNDAEL_BLOCKSIZE )
-			Perl_croak(aTHX_ "set_iv: initial value must be the blocksize (%d bytes), but was %d bytes", RIJNDAEL_BLOCKSIZE, size);
-		Copy(rawbytes, self->iv, RIJNDAEL_BLOCKSIZE, char);
-		}
 
 SV *
 encrypt(self, data)
