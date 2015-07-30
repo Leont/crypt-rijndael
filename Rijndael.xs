@@ -59,26 +59,24 @@ new(class, key, mode=MODE_ECB)
 	SV * class
 	SV * key
 	int mode
-	CODE:
-		{
+	PREINIT:
 		STRLEN keysize;
-
-		if (!SvPOK (key))
-			Perl_croak(aTHX_ "key must be an untainted string scalar");
+	CODE:
+		if (!SvPOK(key))
+			Perl_croak(aTHX_ "Key must be an string scalar");
+		if (SvTAINTED(key))
+			Perl_croak(aTHX_ "Key must be untainted");
 
 		keysize = SvCUR(key);
 
 		if (keysize != 16 && keysize != 24 && keysize != 32)
-			Perl_croak(aTHX_ "wrong key length: key must be 128, 192 or 256 bits long");
+			Perl_croak(aTHX_ "Wrong key length: key must be 128, 192 or 256 bits long");
 		if (mode != MODE_ECB && mode != MODE_CBC && mode != MODE_CFB && mode != MODE_OFB && mode != MODE_CTR)
-			Perl_croak(aTHX_ "illegal mode, see documentation for valid modes");
+			Perl_croak(aTHX_ "Illegal mode, see documentation for valid modes");
 
-		Newz(0, RETVAL, 1, struct cryptstate);
+		Newxz(RETVAL, 1, struct cryptstate);
 		RETVAL->ctx.mode = mode;
-		/* set the IV to zero on initialization */
-		Zero(RETVAL->iv, RIJNDAEL_BLOCKSIZE, char);
 		rijndael_setup(&RETVAL->ctx, keysize, (uint8_t *) SvPV_nolen(key));
-		}
 	OUTPUT:
 		RETVAL
 
