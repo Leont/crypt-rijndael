@@ -72,6 +72,13 @@ systems */
 	typedef u_char    UINT8;
 #endif
 
+/* Systems with musl libc have a sys/types.h with these definitions. */
+#if ! defined(_CRYPT_RIJNDAEL_H_TYPES) && defined(__DEFINED_uint32_t) && defined(__DEFINED_uint8_t)
+	#define _CRYPT_RIJNDAEL_H_TYPES
+	typedef uint32_t UINT32;
+	typedef uint8_t  UINT8;
+#endif
+
 /* I expect this to be the usual case */
 #if ! defined(_CRYPT_RIJNDAEL_H_TYPES) && ( defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_) )   
 	#define _CRYPT_RIJNDAEL_H_TYPES
