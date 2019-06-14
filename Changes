@@ -1,5 +1,8 @@
 Revision history for Perl module Crypt::Rijndael
 
+1.14 - 2019-06-14
+    * Fix UINT32 and UINT8 for musl libc
+
 1.13 - 2015-05-23
     * Correctly null-terminate encoded/decoded strings (RT 769/#5)
 
