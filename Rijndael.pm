@@ -52,7 +52,7 @@ way to communicate this to C<Crypt::CBC>.
 
 The blocksize for Rijndael is 16 bytes (128 bits), although the
 algorithm actually supports any blocksize that is any multiple of
-our bytes.  128 bits, is however, the AES-specified block size,
+four bytes.  128 bits, is however, the AES-specified block size,
 so this is all we support.
 
 =item $cipher = Crypt::Rijndael->new( $key [, $mode] )
