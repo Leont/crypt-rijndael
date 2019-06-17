@@ -24,6 +24,7 @@ my %WriteMakefileArgs = (
   },
   TEST_REQUIRES => {
     'Test::More' => 0,
+    'Digest::MD5' => 0,
   },
   test => {
     'TESTS' => 't/*.t t/*/*.t'
