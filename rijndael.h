@@ -27,88 +27,9 @@
 #if !defined(RIJNDAEL_H)
 #define RIJNDAEL_H
 
+#include <stdint.h>
 #include <stdlib.h>
 #include <sys/types.h>
-
-#ifdef _CRYPT_RIJNDAEL_H_TYPES
-	#undef _CRYPT_RIJNDAEL_H_TYPES
-#endif
-
-/* Irix. We could include stdint.h and use uint8_t but that also
- * requires that we specifically drive the compiler in C99 mode.
- * Defining UINT8 as unsigned char is, ultimately, what stdint.h
- * would do anyway.
- */
-#if defined(_SGIAPI) || defined( __sgi )
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef __uint32_t    UINT32;
-	typedef unsigned char UINT8;
-#endif
-
-/* Solaris has sys/types.h, but doesn't act like everyone else 
- * GCC defines __sun__ and __sun (report from Todd Ross)
- * Solaris cc defines __sun
- * MirBSD defines the same types as Solaris
- */
-#if defined( __sun__ ) || defined( __sun ) || defined( __MirBSD__ )
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef uint32_t UINT32;
-	typedef uint8_t  UINT8;
-#endif
-
-/* Mac OS X 10.3 defines things differently than most other 
-systems */
-#if defined( __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ ) &&  __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__-0 < 1140
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef u_int32_t UINT32;
-	typedef u_char    UINT8;
-#endif
-
-/* Mac OS X 10.3 defines things differently than most other
-systems */
-#if defined(__APPLE__) && ! defined(__DARWIN_UNIX03)
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef u_int32_t UINT32;
-	typedef u_char    UINT8;
-#endif
-
-/* Systems with musl libc have a sys/types.h with these definitions. */
-#if ! defined(_CRYPT_RIJNDAEL_H_TYPES) && defined(__DEFINED_uint32_t) && defined(__DEFINED_uint8_t)
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef uint32_t UINT32;
-	typedef uint8_t  UINT8;
-#endif
-
-/* I expect this to be the usual case */
-#if ! defined(_CRYPT_RIJNDAEL_H_TYPES) && ( defined(_SYS_TYPES_H) || defined(_SYS_TYPES_H_) )   
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef __uint32_t UINT32;
-	typedef __uint8_t  UINT8;
-#endif
-
-#if defined(__CYGWIN__) && ! defined(_CRYPT_RIJNDAEL_H_TYPES)
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef unsigned int  UINT32;
-	typedef unsigned char UINT8;
-#endif
-
-#if defined(__MINGW32__) && ! defined(_CRYPT_RIJNDAEL_H_TYPES)
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef unsigned int  UINT32;
-	typedef unsigned char UINT8;
-#endif
-
-#if defined(WIN32) && ! defined(_CRYPT_RIJNDAEL_H_TYPES)
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef unsigned int  UINT32;
-	typedef unsigned char UINT8;
-#endif
-
-#if ! defined(_CRYPT_RIJNDAEL_H_TYPES)
-	#define _CRYPT_RIJNDAEL_H_TYPES
-	typedef unsigned int  UINT32;
-	typedef unsigned char UINT8;
-#endif	
 
 /* Other block sizes and key lengths are possible, but in the context of
  * the ssh protocols, 256 bits is the default. 
@@ -129,8 +50,8 @@ systems */
 #define RIJNDAEL_MAX_KEYSIZE 32
 
 typedef struct {
-  UINT32 keys[60];		/* maximum size of key schedule */
-  UINT32 ikeys[60];		/* inverse key schedule */
+  uint32_t keys[60];		/* maximum size of key schedule */
+  uint32_t ikeys[60];		/* inverse key schedule */
   int nrounds;			/* number of rounds to use for our key size */
   int mode;			/* encryption mode */
 } RIJNDAEL_context;
@@ -144,7 +65,7 @@ typedef struct {
  * PASS A VALUE LESS THAN 16 TO KEYSIZE! 
  */
 void
-rijndael_setup(RIJNDAEL_context *ctx, size_t keysize, const UINT8 *key);
+rijndael_setup(RIJNDAEL_context *ctx, size_t keysize, const uint8_t *key);
 
 /*
  * rijndael_encrypt()
@@ -160,8 +81,8 @@ rijndael_setup(RIJNDAEL_context *ctx, size_t keysize, const UINT8 *key);
 
 void
 rijndael_encrypt(RIJNDAEL_context *context,
-		 const UINT8 *plaintext,
-		 UINT8 *ciphertext);
+		 const uint8_t *plaintext,
+		 uint8_t *ciphertext);
 
 /*
  * rijndael_decrypt()
@@ -178,18 +99,18 @@ rijndael_encrypt(RIJNDAEL_context *context,
 
 void
 rijndael_decrypt(RIJNDAEL_context *context,
-		 const UINT8 *ciphertext,
-		 UINT8 *plaintext);
+		 const uint8_t *ciphertext,
+		 uint8_t *plaintext);
 
 /* Encrypt a block of plaintext in a mode specified in the context */
 void
-block_encrypt(RIJNDAEL_context *ctx, UINT8 *input, int inputlen,
-	      UINT8 *output, UINT8 *iv);
+block_encrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen,
+	      uint8_t *output, uint8_t *iv);
 
 /* Decrypt a block of plaintext in a mode specified in the context */
 void
-block_decrypt(RIJNDAEL_context *ctx, UINT8 *input, int inputlen,
-	      UINT8 *output, UINT8 *iv);
+block_decrypt(RIJNDAEL_context *ctx, uint8_t *input, int inputlen,
+	      uint8_t *output, uint8_t *iv);
 
 
 #endif /* RIJNDAEL_H */
