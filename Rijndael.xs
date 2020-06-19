@@ -31,7 +31,7 @@
 
 typedef struct cryptstate {
   RIJNDAEL_context ctx;
-  UINT8 iv[RIJNDAEL_BLOCKSIZE];
+  uint8_t iv[RIJNDAEL_BLOCKSIZE];
   int mode;
 } *Crypt__Rijndael;
 
@@ -76,7 +76,7 @@ new(class, key, mode=MODE_ECB)
 		RETVAL->ctx.mode = RETVAL->mode = mode;
 		/* set the IV to zero on initialization */
 		Zero(RETVAL->iv, RIJNDAEL_BLOCKSIZE, char);
-		rijndael_setup(&RETVAL->ctx, keysize, (UINT8 *) SvPV_nolen(key));
+		rijndael_setup(&RETVAL->ctx, keysize, (uint8_t *) SvPV_nolen(key));
 		}
 	OUTPUT:
 		RETVAL
@@ -111,7 +111,7 @@ encrypt(self, data)
 		void *rawbytes = SvPV(data,size);
 
 		if (size) {
-			UINT8* buffer;
+			uint8_t* buffer;
 
 			if (size % RIJNDAEL_BLOCKSIZE)
 				Perl_croak(aTHX_ "encrypt: datasize not multiple of blocksize (%d bytes)", RIJNDAEL_BLOCKSIZE);
@@ -119,7 +119,7 @@ encrypt(self, data)
 			RETVAL = newSV(size);
 			SvPOK_only(RETVAL);
 			SvCUR_set(RETVAL, size);
-			buffer = (UINT8 *)SvPV_nolen(RETVAL);
+			buffer = (uint8_t *)SvPV_nolen(RETVAL);
 			(ix ? block_decrypt : block_encrypt)
 				(&self->ctx, rawbytes, size, buffer, self->iv);
 			buffer[size] = '\0';
