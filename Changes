@@ -1,5 +1,8 @@
 Revision history for Perl module Crypt::Rijndael
 
+1.15 - 2020-10-10
+   * Use standard uint8_t and uint32_t from stdint.h
+
 1.14 - 2019-06-14
     * Fix UINT32 and UINT8 for musl libc
 
