@@ -76,7 +76,7 @@ new(class, key, mode=MODE_ECB)
 
 		Newxz(RETVAL, 1, struct cryptstate);
 		RETVAL->ctx.mode = mode;
-		rijndael_setup(&RETVAL->ctx, keysize, (uint8_t *) SvPV_nolen(key));
+		rijndael_setup(&RETVAL->ctx, keysize, (uint8_t *) SvPVbyte_nolen(key));
 	OUTPUT:
 		RETVAL
 
@@ -100,7 +100,7 @@ encrypt(self, data, iv = self->iv)
 		{
 		SV *res;
 		STRLEN size;
-		void *rawbytes = SvPV(data,size);
+		void *rawbytes = SvPVbyte(data,size);
 
 		if (size) {
 			uint8_t* buffer;
@@ -111,7 +111,7 @@ encrypt(self, data, iv = self->iv)
 			RETVAL = newSV(size);
 			SvPOK_only(RETVAL);
 			SvCUR_set(RETVAL, size);
-			buffer = (uint8_t *)SvPV_nolen(RETVAL);
+			buffer = (uint8_t *)SvPVbyte_nolen(RETVAL);
 			(ix ? block_decrypt : block_encrypt)
 				(&self->ctx, rawbytes, size, buffer, iv);
 			buffer[size] = '\0';

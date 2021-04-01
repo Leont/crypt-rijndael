@@ -6,7 +6,7 @@ T_IVEC
     {
 	const char* ret;
 	STRLEN size;
-	$var = ($type)SvPV($arg, size);
+	$var = ($type)SvPVbyte($arg, size);
 	if (size != RIJNDAEL_BLOCKSIZE)
 		Perl_croak(aTHX_ \"set_iv: initial value must be the blocksize (%d bytes), but was %d bytes\", RIJNDAEL_BLOCKSIZE, size);
 	}
