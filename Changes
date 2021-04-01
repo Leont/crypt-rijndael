@@ -1,5 +1,9 @@
 Revision history for Perl module Crypt::Rijndael
 
+1.16 - 2021-04-01
+   * Add non-blocksized encoding support to streaming modes
+   * Explicitly use downgraded strings
+
 1.15 - 2020-10-10
    * Use standard uint8_t and uint32_t from stdint.h
 
