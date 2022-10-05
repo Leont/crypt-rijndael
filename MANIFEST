@@ -1,0 +1,17 @@
+_rijndael.c
+Changes
+COPYING
+LICENSE
+Makefile.PL
+MANIFEST			This list of files
+MANIFEST.SKIP
+NEWS
+ppport.h
+README
+rijndael.h
+Rijndael.pm
+Rijndael.xs
+t/00_load.t
+t/modes.t
+t/rt/27632.t
+typemap
