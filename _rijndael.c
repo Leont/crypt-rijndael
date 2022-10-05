@@ -378,7 +378,7 @@ static void key_addition32to8(const uint32_t *txt, const uint32_t *keys, uint8_t
   }
 }
 
-static int idx[4][4] = {
+static const int idx[4][4] = {
   { 0, 1, 2, 3 },
   { 1, 2, 3, 0 },
   { 2, 3, 0, 1 },
@@ -425,7 +425,7 @@ static void rijndael_encrypt(const RIJNDAEL_context *ctx, const uint8_t *plainte
   key_addition32to8(t, &(ctx->keys[4*ctx->nrounds]), ciphertext);
 }
 
-static int iidx[4][4] = {
+static const int iidx[4][4] = {
   { 0, 1, 2, 3 },
   { 3, 0, 1, 2 },
   { 2, 3, 0, 1 },
